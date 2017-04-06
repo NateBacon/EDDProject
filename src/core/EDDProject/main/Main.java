@@ -9,6 +9,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Window frame = new Window(420,640, "I <3 Luis");
+		
+		
 
 		JFrame frame = new JFrame("test");
 		Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
