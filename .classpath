@@ -2,19 +2,19 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/baker/Desktop/j3d-1_5_2-windows-amd64/j3d-jre/lib/ext/j3dcore.jar">
+	<classpathentry kind="lib" path="lib/ext/j3dcore.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/baker/Desktop/j3d-1_5_2-windows-amd64/j3d-jre/bin"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="EDDProject/bin"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/baker/Desktop/j3d-1_5_2-windows-amd64/j3d-jre/lib/ext/j3dutils.jar">
+	<classpathentry kind="lib" path="lib/ext/j3dutils.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/baker/Desktop/j3d-1_5_2-windows-amd64/j3d-jre/bin"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="EDDProject/bin"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/baker/Desktop/j3d-1_5_2-windows-amd64/j3d-jre/lib/ext/vecmath.jar">
+	<classpathentry kind="lib" path="lib/ext/vecmath.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/baker/Desktop/j3d-1_5_2-windows-amd64/j3d-jre/bin"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="EDDProject/bin"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
