@@ -2,6 +2,7 @@ package core.EDDProject.main;
 
 import javax.media.j3d.Canvas3D;
 import javax.swing.JFrame;
+import javax.vecmath.Color3f;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
@@ -13,6 +14,7 @@ public class Main {
 		
 		Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 		Engine engine = new Engine(canvas, frame);
+		engine.addShape(0.3f, 0.3f, 0.3f, new Color3f(0.3f, 0.3f, 1.0f));
 	}
 
 }
