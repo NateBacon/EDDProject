@@ -11,9 +11,6 @@ public class Main {
 		// TODO Auto-generated method stub
 		Window frame = new Window(420,640, "I <3 Luis");
 		
-		
-
-		JFrame frame = new JFrame("test");
 		Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 		Engine engine = new Engine(canvas, frame);
 	}
