@@ -22,6 +22,7 @@ import javax.vecmath.Vector3f;
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 import com.sun.j3d.utils.behaviors.mouse.MouseTranslate;
 import com.sun.j3d.utils.geometry.Box;
+import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.picking.PickCanvas;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
@@ -128,6 +129,18 @@ public class Engine extends SimpleUniverse {
 		
 		
 		
+	}
+	
+	public void addShape(float radius, Color3f color){
+		Material m = new Material();
+		m.setEmissiveColor(color);
+		m.setLightingEnable(true);
+		Appearance app = new  Appearance();
+		app.setMaterial(m);
+		Sphere sphere = new Sphere(radius, app);
+		group.detach();
+		transformGroup.addChild(sphere);
+		this.addBranchGraph(group);
 	}
 	
 }
