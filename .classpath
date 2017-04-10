@@ -4,17 +4,17 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/ext/j3dcore.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="EDDProject/bin"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="EDDProject/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/ext/j3dutils.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="EDDProject/bin"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="EDDProject/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/ext/vecmath.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="EDDProject/bin"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="EDDProject/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
