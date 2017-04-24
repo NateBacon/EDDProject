@@ -81,12 +81,12 @@ public class Engine extends SimpleUniverse {
 		transformGroup.addChild(translateBehaviour);
 		
 		//lazy lights
-//		DirectionalLight light = new DirectionalLight(new Color3f(1.0f, 1.0f, 1.0f), new Vector3f(1.0f, 1.0f, 1.0f));
-//		AmbientLight temp = new AmbientLight(new Color3f(1.0f, 1.0f, 1.0f));
-//		temp.setInfluencingBounds(bounds);
-//		light.setInfluencingBounds(bounds);
-//		group.addChild(light);
-//		group.addChild(temp);
+		DirectionalLight light = new DirectionalLight(new Color3f(1.0f, 1.0f, 1.0f), new Vector3f(1.0f, 1.0f, 1.0f));
+		AmbientLight temp = new AmbientLight(new Color3f(1.0f, 1.0f, 1.0f));
+		temp.setInfluencingBounds(bounds);
+		light.setInfluencingBounds(bounds);
+		group.addChild(light);
+		group.addChild(temp);
 		
 		//add the transform group to the root group
 		group.addChild(transformGroup);
