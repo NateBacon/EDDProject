@@ -116,7 +116,7 @@ public class Engine extends SimpleUniverse {
 		
 	}
 	
-	public void addShape(float width, float length, float height, Color3f color){//this just makes a rectangle right now
+	public void addShape(float width, float length, float height, Color3f color, Transform3D initPosition){//this just makes a rectangle right now
 		Material m = new Material();
 		m.setEmissiveColor(color);
 		m.setLightingEnable(true);
@@ -124,14 +124,16 @@ public class Engine extends SimpleUniverse {
 		app.setMaterial(m);
 		Box box = new Box(width, length, height, app);
 		group.detach();
-		transformGroup.addChild(box);
+		TransformGroup thisGroup  = new TransformGroup(initPosition);
+		thisGroup.addChild(box);
+		transformGroup.addChild(thisGroup);
 		this.addBranchGraph(group);
 		
 		
 		
 	}
 	
-	public void addShape(float radius, Color3f color){
+	public void addShape(float radius, Color3f color, Transform3D initPosition){
 		Material m = new Material();
 		m.setEmissiveColor(color);
 		m.setLightingEnable(true);
@@ -139,7 +141,9 @@ public class Engine extends SimpleUniverse {
 		app.setMaterial(m);
 		Sphere sphere = new Sphere(radius, app);
 		group.detach();
-		transformGroup.addChild(sphere);
+		TransformGroup thisGroup = new  TransformGroup(initPosition);
+		thisGroup.addChild(sphere);
+		transformGroup.addChild(thisGroup);
 		this.addBranchGraph(group);
 	}
 	
