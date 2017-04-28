@@ -24,7 +24,7 @@ public class Main {
 		Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 		Engine engine = new Engine(canvas, daPanel);
 		engine.addShape(0.3f, 0.4f, 0.3f, new Color3f(.35f, .2f, .001f));
-		
+		engine.addShape(0.5f, new Color3f(.5f, .2f, .2f));
 	}
 
 }
