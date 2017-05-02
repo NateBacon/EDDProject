@@ -13,16 +13,23 @@ import javax.vecmath.Vector3d;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
 public class Main {
+	
+	public static int WIDTH, HEIGHT;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Window frame = new Window(420,640, "I <3 Luis");
-		Window frame2 = new Window(640,640,"UI Window");
+		WIDTH = 1200;
+		HEIGHT = 800;
+				
+		//Window frame = new Window(HEIGHT-100,WIDTH/2+100, "I <3 Luis");
+		Window frame2 = new Window(HEIGHT,WIDTH,"UI Window");
 		frame2.setBackground(Color.BLACK);
 		JPanel daPanel = new JPanel();
 		
 		frame2.setLayout(new BorderLayout());
-		frame2.add(daPanel,BorderLayout.CENTER);
+		frame2.add(daPanel);
+		frame2.getContentPane().setLayout(null);
+		daPanel.setLocation(100, 0);
 		Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 		Engine engine = new Engine(canvas, daPanel);
 		Transform3D initCubePosition =  new Transform3D();
