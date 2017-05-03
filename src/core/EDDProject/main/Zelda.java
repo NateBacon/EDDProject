@@ -3,16 +3,22 @@ package core.EDDProject.main;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class Zelda extends Canvas implements Runnable{
+import javax.swing.JFrame;
+
+public class Zelda extends Canvas implements Runnable, KeyListener{
 	private Thread thread;
 	private boolean running = false;
-	
-	public Zelda(){
-		
+	private KeyListener kListen;
+	JFrame frame;
+	public Zelda(JFrame frame){
+		this.frame = frame;
+		this.addKeyListener(kListen);
 	}
 	
 
@@ -81,6 +87,30 @@ public class Zelda extends Canvas implements Runnable{
 	    g.dispose();
 	    bs.show();
 	    
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+			frame.dispose();
+		
+		}
+		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 	}
 	

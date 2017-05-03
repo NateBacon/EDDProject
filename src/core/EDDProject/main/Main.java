@@ -2,6 +2,7 @@ package core.EDDProject.main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.KeyListener;
 
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Transform3D;
@@ -23,13 +24,15 @@ public class Main {
 				
 		//Window frame = new Window(HEIGHT-100,WIDTH/2+100, "I <3 Luis");
 		Window frame2 = new Window(HEIGHT,WIDTH,"UI Window");
-		frame2.setBackground(Color.BLACK);
+		Zelda zelda = new Zelda(frame2);
+		frame2.getContentPane().setBackground(Color.gray);
 		JPanel daPanel = new JPanel();
+		
 		
 		frame2.setLayout(new BorderLayout());
 		frame2.add(daPanel);
 		frame2.getContentPane().setLayout(null);
-		daPanel.setLocation(100, 0);
+		daPanel.setLocation(0, 0);
 		Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 		Engine engine = new Engine(canvas, daPanel);
 		Transform3D initCubePosition =  new Transform3D();
