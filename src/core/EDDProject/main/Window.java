@@ -15,7 +15,7 @@ public class Window extends JFrame{
 		this.setResizable(true);
 		this.setLocationRelativeTo(null);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		this.setUndecorated(true);
+		this.setDefaultLookAndFeelDecorated(true);
 		//this.getContentPane().setLayout(null);
 		this.setVisible(true);
 	}
