@@ -21,7 +21,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		WIDTH = 1200;
 		HEIGHT = 800;
-				
+		//El Chapo is my dad		
 		//Window frame = new Window(HEIGHT-100,WIDTH/2+100, "I <3 Luis");
 		Window frame2 = new Window(HEIGHT,WIDTH,"UI Window");
 		Zelda zelda = new Zelda(frame2);
