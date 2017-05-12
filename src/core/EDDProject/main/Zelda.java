@@ -100,7 +100,7 @@ public class Zelda extends Canvas implements Runnable, KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-			frame.dispose();
+			System.exit(0);
 		
 		}
 		

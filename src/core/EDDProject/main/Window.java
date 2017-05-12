@@ -12,9 +12,9 @@ public class Window extends JFrame{
 		this.setMaximumSize(new Dimension(width, height));
 		this.setMinimumSize(new Dimension(width, height));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setDefaultLookAndFeelDecorated(true);
 		//this.getContentPane().setLayout(null);
 		this.setVisible(true);
