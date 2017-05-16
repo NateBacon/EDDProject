@@ -36,7 +36,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		HEIGHT = 600;
 		WIDTH = 1000;
-		//El Chapo is my dad		
+		
 		//Window frame = new Window(HEIGHT-100,WIDTH/2+100, "I <3 Luis");
 		Window frame2 = new Window(HEIGHT,WIDTH,"UI Window");
 		//Zelda zelda = new Zelda(frame2);
@@ -46,7 +46,8 @@ public class Main {
 		JComboBox button2 = new JComboBox();
 		JLabel text1 = new JLabel();
 		daPanel.setSize((WIDTH/2)+100, HEIGHT/2+200);
-		text1.setText("Description");
+		String partName = "";
+		text1.setText("PC Component");
 		text1.setForeground(Color.WHITE);
 		text1.setBorder(null);
 		frame2.setLayout(null);
@@ -82,15 +83,52 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cB = (JComboBox)e.getSource();
 				String select = (String)cB.getSelectedItem();
-				if(select.equals("Chip Board")){
+				if(select.equals("Motherboard")){
 					//add code to perform whatever tricks you want
-					engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() );
+					text1.setText("Motherboard"); 
+					engine.addShape(0.6f, 0.05f, 0.6f, new Color3f(.4f, .2f, .001f), new Transform3D());
+					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
+					
+				}
+				
+				if(select.equals("CPU")){
+					//add code to perform whatever tricks you want
+					text1.setText("CPU"); 
+					engine.addShape(0.5f, 0.2f, 0.2f, new Color3f(.4f, .2f, .1f), new Transform3D());
+					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
+					
+				}
+				
+				if(select.equals("RAM")){
+					//add code to perform whatever tricks you want
+					text1.setText("RAM"); 
+					engine.addShape(0.5f, 0.2f, 0.2f, new Color3f(.4f, .2f, .1f), new Transform3D());
+					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
+					
+				}
+				
+				if(select.equals("Graphics Card")){
+					//add code to perform whatever tricks you want
+					text1.setText("Graphics Card"); 
+					engine.addShape(0.5f, 0.2f, 0.2f, new Color3f(.4f, .2f, .1f), new Transform3D());
+					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
+					
+				}
+				
+				if(select.equals("Power Supply")){
+					//add code to perform whatever tricks you want
+					text1.setText("Power Supply"); 
+					engine.addShape(0.5f, 0.2f, 0.2f, new Color3f(.4f, .2f, .1f), new Transform3D());
+					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
+					
 				}
 				
 			}});
-		button1.addItem(new String("Cancer"));
-		button1.addItem(new String("Autism"));
-		button1.addItem(new String("Chip Board"));
+		button1.addItem(new String("Motherboard"));
+		button1.addItem(new String("CPU"));
+		button1.addItem(new String("RAM"));
+		button1.addItem(new String("Graphics Card"));
+		button1.addItem(new String("Power Supply"));
 		button1.setEnabled(true);
 		button1.setVisible(true);
 		
