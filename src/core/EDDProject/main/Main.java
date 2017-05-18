@@ -45,6 +45,7 @@ public class Main {
 		JComboBox button1 = new JComboBox();
 		JComboBox button2 = new JComboBox();
 		JLabel text1 = new JLabel();
+		JLabel partDescription = new JLabel();
 		daPanel.setSize((WIDTH/2)+100, HEIGHT/2+200);
 		String partName = "";
 		text1.setText("PC Component");
@@ -59,8 +60,8 @@ public class Main {
 		Engine engine = new Engine(canvas, daPanel);
 		Transform3D initCubePosition =  new Transform3D();
 		initCubePosition.setTranslation(new Vector3d(1.0, -0.2, 0.0));
-		engine.addShape(0.3f, 0.4f, 0.3f, new Color3f(.35f, .2f, .001f), initCubePosition );
-		engine.addShape(0.3f, new Color3f(0,0, 1), new Transform3D());
+		//engine.addShape(0.3f, 0.4f, 0.3f, new Color3f(.35f, .2f, .001f), initCubePosition );
+		//engine.addShape(0.3f, new Color3f(0,0, 1), new Transform3D());
 		
 		text1.setBounds(150,10,300,50);
 		daPanel.setLocation(0, 0);
@@ -94,15 +95,19 @@ public class Main {
 				if(select.equals("CPU")){
 					//add code to perform whatever tricks you want
 					text1.setText("CPU"); 
-					engine.addShape(0.5f, 0.2f, 0.2f, new Color3f(.4f, .2f, .1f), new Transform3D());
+					Transform3D CPU_Pos = new Transform3D();
+					CPU_Pos.setTranslation(new Vector3d(0,.05,0));
+					engine.addShape(0.06f, 0.01f, 0.06f, new Color3f(.1f, .2f, 1.0f), CPU_Pos);
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}
 				
 				if(select.equals("RAM")){
 					//add code to perform whatever tricks you want
-					text1.setText("RAM"); 
-					engine.addShape(0.5f, 0.2f, 0.2f, new Color3f(.4f, .2f, .1f), new Transform3D());
+					text1.setText("RAM");
+					Transform3D ramamamamapos = new Transform3D();
+					ramamamamapos.setTranslation(new Vector3d(.05,.1,.3));
+					engine.addShape(0.4f, 0.06f, 0.02f, new Color3f(.4f, .2f, .1f), ramamamamapos);
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}
@@ -110,7 +115,10 @@ public class Main {
 				if(select.equals("Graphics Card")){
 					//add code to perform whatever tricks you want
 					text1.setText("Graphics Card"); 
-					engine.addShape(0.5f, 0.2f, 0.2f, new Color3f(.4f, .2f, .1f), new Transform3D());
+					Transform3D GPU_Vector  =new Transform3D();
+					//shorten, shrink width, raise, move -x
+					GPU_Vector.setTranslation(new Vector3d(-.2,.1,-.1));
+					engine.addShape(0.075f, 0.15f, 0.5f, new Color3f(.4f, 1f, .1f), GPU_Vector);
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}
@@ -118,6 +126,7 @@ public class Main {
 				if(select.equals("Power Supply")){
 					//add code to perform whatever tricks you want
 					text1.setText("Power Supply"); 
+					
 					engine.addShape(0.5f, 0.2f, 0.2f, new Color3f(.4f, .2f, .1f), new Transform3D());
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
