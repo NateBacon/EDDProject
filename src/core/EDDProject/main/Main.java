@@ -58,9 +58,15 @@ public class Main {
 		
 		Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 		Engine engine = new Engine(canvas, daPanel);
-		Transform3D initCubePosition =  new Transform3D();
-		initCubePosition.setTranslation(new Vector3d(1.0, -0.2, 0.0));
-		//engine.addShape(0.3f, 0.4f, 0.3f, new Color3f(.35f, .2f, .001f), initCubePosition );
+		Transform3D TestBench_Top_Vector =  new Transform3D();
+		Transform3D TestBench_Leg1_Vector =  new Transform3D();
+		Transform3D TestBench_Leg2_Vector =  new Transform3D();
+		TestBench_Top_Vector.setTranslation(new Vector3d(0.0, 0.0, 0.0));
+		TestBench_Leg1_Vector.setTranslation(new Vector3d(-.45, -0.1, 0.0));
+		TestBench_Leg2_Vector.setTranslation(new Vector3d(0.45, -0.1, 0.0));
+		engine.addShape(0.6f, 0.025f, 0.6f, new Color3f(.35f, .2f, .001f), TestBench_Top_Vector );
+		engine.addShape(0.025f, 0.1f, 0.5f, new Color3f(.02f, .5f, .02f), TestBench_Leg1_Vector );
+		engine.addShape(0.025f, 0.1f, 0.5f, new Color3f(.02f, .5f, .02f), TestBench_Leg2_Vector );
 		//engine.addShape(0.3f, new Color3f(0,0, 1), new Transform3D());
 		
 		text1.setBounds(150,10,300,50);
@@ -87,7 +93,9 @@ public class Main {
 				if(select.equals("Motherboard")){
 					//add code to perform whatever tricks you want
 					text1.setText("Motherboard"); 
-					engine.addShape(0.6f, 0.05f, 0.6f, new Color3f(.4f, .2f, .001f), new Transform3D());
+					Transform3D MTX_Vector = new Transform3D();
+					MTX_Vector.setTranslation(new Vector3d(-.06,.06,.06));
+					engine.addShape(0.5f, 0.025f, 0.5f, new Color3f(.01f, .1f, .6f), MTX_Vector);
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}
@@ -96,8 +104,8 @@ public class Main {
 					//add code to perform whatever tricks you want
 					text1.setText("CPU"); 
 					Transform3D CPU_Pos = new Transform3D();
-					CPU_Pos.setTranslation(new Vector3d(0,.05,0));
-					engine.addShape(0.06f, 0.01f, 0.06f, new Color3f(.1f, .2f, 1.0f), CPU_Pos);
+					CPU_Pos.setTranslation(new Vector3d(-.1,.09,-.22));
+					engine.addShape(0.09f, 0.01f, 0.09f, new Color3f(.5f, .2f, .2f), CPU_Pos);
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}
@@ -105,9 +113,9 @@ public class Main {
 				if(select.equals("RAM")){
 					//add code to perform whatever tricks you want
 					text1.setText("RAM");
-					Transform3D ramamamamapos = new Transform3D();
-					ramamamamapos.setTranslation(new Vector3d(.05,.1,.3));
-					engine.addShape(0.4f, 0.06f, 0.02f, new Color3f(.4f, .2f, .1f), ramamamamapos);
+					Transform3D RAM_Vector = new Transform3D();
+					RAM_Vector.setTranslation(new Vector3d(.05,.1,.3));
+					engine.addShape(0.4f, 0.06f, 0.02f, new Color3f(.4f, .2f, .1f), RAM_Vector);
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}
