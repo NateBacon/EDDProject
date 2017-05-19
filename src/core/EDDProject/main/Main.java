@@ -37,6 +37,7 @@ public class Main {
 		HEIGHT = 600;
 		WIDTH = 1000;
 		
+		
 		//Window frame = new Window(HEIGHT-100,WIDTH/2+100, "I <3 Luis");
 		Window frame2 = new Window(HEIGHT,WIDTH,"UI Window");
 		//Zelda zelda = new Zelda(frame2);
@@ -93,9 +94,9 @@ public class Main {
 				if(select.equals("Motherboard")){
 					//add code to perform whatever tricks you want
 					text1.setText("Motherboard"); 
-					Transform3D MTX_Vector = new Transform3D();
-					MTX_Vector.setTranslation(new Vector3d(-.06,.06,.06));
-					engine.addShape(0.5f, 0.025f, 0.5f, new Color3f(.01f, .1f, .6f), MTX_Vector);
+					Transform3D ATX_Vector = new Transform3D();
+					ATX_Vector.setTranslation(new Vector3d(-.06,.06,.06));
+					engine.addShape(0.5f, 0.025f, 0.5f, new Color3f(.01f, .1f, .6f), ATX_Vector);
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}

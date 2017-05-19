@@ -19,6 +19,7 @@ public class Zelda extends Canvas implements Runnable, KeyListener{
 	public Zelda(JFrame frame){
 		this.frame = frame;
 		this.addKeyListener(kListen);
+		
 	}
 	
 
