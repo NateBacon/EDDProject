@@ -59,16 +59,22 @@ public class Main {
 		
 		Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 		Engine engine = new Engine(canvas, daPanel);
+		Transform3D Vector01 =  new Transform3D();
 		Transform3D TestBench_Top_Vector =  new Transform3D();
 		Transform3D TestBench_Leg1_Vector =  new Transform3D();
 		Transform3D TestBench_Leg2_Vector =  new Transform3D();
+		//Vector01.setTranslation(new Vector3d(0.05,0.0,0.0));
 		TestBench_Top_Vector.setTranslation(new Vector3d(0.0, 0.0, 0.0));
-		TestBench_Leg1_Vector.setTranslation(new Vector3d(-.45, -0.1, 0.0));
-		TestBench_Leg2_Vector.setTranslation(new Vector3d(0.45, -0.1, 0.0));
-		engine.addShape(0.6f, 0.025f, 0.6f, new Color3f(.35f, .2f, .001f), TestBench_Top_Vector );
-		engine.addShape(0.025f, 0.1f, 0.5f, new Color3f(.02f, .5f, .02f), TestBench_Leg1_Vector );
-		engine.addShape(0.025f, 0.1f, 0.5f, new Color3f(.02f, .5f, .02f), TestBench_Leg2_Vector );
+		TestBench_Leg1_Vector.setTranslation(new Vector3d(-.45, -0.125, 0.0));
+		TestBench_Leg2_Vector.setTranslation(new Vector3d(0.45, -0.125, 0.0));
+		engine.addShape(0.6f, 0.025f, 0.6f, new Color3f(.2f, .05f, .01f), TestBench_Top_Vector );
+		engine.addShape(0.025f, 0.1f, 0.5f, new Color3f(.2f, .05f, .01f), TestBench_Leg1_Vector );
+		engine.addShape(0.025f, 0.1f, 0.5f, new Color3f(.2f, .05f, .01f), TestBench_Leg2_Vector );
+		//engine.addShape(0f,.5f,.5f, new Color3f(.2f, .1f, .05f), TestBench_Top_Vector);
+		//engine.addShape(0f,.5f,.5f, new Color3f(.2f, .1f, .05f), Vector01);
+		//engine.addShape(0.5f,.5f,.0f, new Color3f(.2f, .1f, .05f), TestBench_Top_Vector);
 		//engine.addShape(0.3f, new Color3f(0,0, 1), new Transform3D());
+		
 		
 		text1.setBounds(150,10,300,50);
 		daPanel.setLocation(0, 0);
@@ -115,8 +121,8 @@ public class Main {
 					//add code to perform whatever tricks you want
 					text1.setText("RAM");
 					Transform3D RAM_Vector = new Transform3D();
-					RAM_Vector.setTranslation(new Vector3d(.05,.1,.3));
-					engine.addShape(0.4f, 0.06f, 0.02f, new Color3f(.4f, .2f, .1f), RAM_Vector);
+					RAM_Vector.setTranslation(new Vector3d(.3,.13,-.1));
+					engine.addShape(0.02f, 0.05f, 0.3f, new Color3f(.4f, .2f, .1f), RAM_Vector);
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}
@@ -126,8 +132,8 @@ public class Main {
 					text1.setText("Graphics Card"); 
 					Transform3D GPU_Vector  =new Transform3D();
 					//shorten, shrink width, raise, move -x
-					GPU_Vector.setTranslation(new Vector3d(-.2,.1,-.1));
-					engine.addShape(0.075f, 0.15f, 0.5f, new Color3f(.4f, 1f, .1f), GPU_Vector);
+					GPU_Vector.setTranslation(new Vector3d(-.2,.13,.3));
+					engine.addShape(0.35f, 0.07f, 0.04f, new Color3f(.4f, 1f, .1f), GPU_Vector);
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}
@@ -135,8 +141,9 @@ public class Main {
 				if(select.equals("Power Supply")){
 					//add code to perform whatever tricks you want
 					text1.setText("Power Supply"); 
-					
-					engine.addShape(0.5f, 0.2f, 0.2f, new Color3f(.4f, .2f, .1f), new Transform3D());
+					Transform3D PSU_Vector = new Transform3D();
+					PSU_Vector.setTranslation(new Vector3d(-.3,-.1,0));
+					engine.addShape(0.1f, 0.1f, 0.4f, new Color3f(.4f, .2f, .1f), PSU_Vector);
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}
