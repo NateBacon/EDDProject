@@ -39,23 +39,33 @@ public class Main {
 		
 		
 		//Window frame = new Window(HEIGHT-100,WIDTH/2+100, "I <3 Luis");
-		Window frame2 = new Window(HEIGHT,WIDTH,"UI Window");
+		Window frame2 = new Window(HEIGHT,WIDTH,"UI Window"); 
 		//Zelda zelda = new Zelda(frame2);
 		//frame2.getContentPane().setBackground(Color.gray);
-		JPanel daPanel = (JPanel) frame2.getContentPane();
-		JComboBox button1 = new JComboBox();
-		JComboBox button2 = new JComboBox();
+		
+		JPanel daPanel = (JPanel) frame2.getContentPane();	
+		JComboBox menu1 = new JComboBox();
+		JComboBox menu2 = new JComboBox();
 		JLabel text1 = new JLabel();
-		JLabel partDescription = new JLabel();
-		daPanel.setSize((WIDTH/2)+100, HEIGHT/2+200);
-		String partName = "";
-		text1.setText("PC Component");
-		text1.setForeground(Color.WHITE);
+		JLabel partDescription_Label = new JLabel();
+		
+		daPanel.setSize((WIDTH/2)+100, HEIGHT/2+100); //engine needs to be 600 by 400
+		String partName = "PC Component: ";
+		String partDescription_Text = "Description: ";
+		text1.setText(partName);
+		text1.setForeground(Color.BLACK);
 		text1.setBorder(null);
+		partDescription_Label.setText(partDescription_Text);
+		partDescription_Label.setForeground(Color.BLACK);
+		partDescription_Label.setBorder(null);
 		frame2.setLayout(null);
+		
 		JPanel rightPanel = new JPanel();
 		rightPanel.setLayout(null);
 		rightPanel.setSize((WIDTH/2)-100, HEIGHT);
+		JPanel bottomPanel = (JPanel)frame2.getContentPane();
+		bottomPanel.setLayout(null);
+		bottomPanel.setSize((WIDTH/2)+100,(HEIGHT/2)-100);
 		
 		Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
 		Engine engine = new Engine(canvas, daPanel);
@@ -76,20 +86,25 @@ public class Main {
 		//engine.addShape(0.3f, new Color3f(0,0, 1), new Transform3D());
 		
 		
-		text1.setBounds(150,10,300,50);
+		text1.setBounds(100,20,200,40);
 		daPanel.setLocation(0, 0);
 		rightPanel.setLocation((WIDTH/2)+100, 0);
-		button1.setBounds(50, 50, 300, 50);
-		button2.setBounds(50, 150, 300, 50);
+		menu1.setBounds(50, 80, 300, 50);
+		menu2.setBounds(50, 170, 300, 50);
 		rightPanel.setBackground(Color.gray);
 		
-		rightPanel.add(button1);
-		rightPanel.add(button2);
+		partDescription_Label.setBounds(100,20,200,40);
+		rightPanel.add(menu1);
+		rightPanel.add(menu2);
 		rightPanel.add(text1);
 		//button1.setLocation(0, 0);
 		//rightPanel.add(button1);
 		
-		button1.addActionListener(new ActionListener(){
+		bottomPanel.setLocation(0,(HEIGHT/2)+300);
+		bottomPanel.setBackground(Color.lightGray);	
+		bottomPanel.add(partDescription_Label);
+		
+		menu1.addActionListener(new ActionListener(){
 			
 		
 
@@ -99,7 +114,7 @@ public class Main {
 				String select = (String)cB.getSelectedItem();
 				if(select.equals("Motherboard")){
 					//add code to perform whatever tricks you want
-					text1.setText("Motherboard"); 
+					text1.setText(partName+"Motherboard"); 
 					Transform3D ATX_Vector = new Transform3D();
 					ATX_Vector.setTranslation(new Vector3d(-.06,.06,.06));
 					engine.addShape(0.5f, 0.025f, 0.5f, new Color3f(.01f, .1f, .6f), ATX_Vector);
@@ -109,7 +124,7 @@ public class Main {
 				
 				if(select.equals("CPU")){
 					//add code to perform whatever tricks you want
-					text1.setText("CPU"); 
+					text1.setText(partName+"CPU"); 
 					Transform3D CPU_Pos = new Transform3D();
 					CPU_Pos.setTranslation(new Vector3d(-.1,.09,-.22));
 					engine.addShape(0.09f, 0.01f, 0.09f, new Color3f(.5f, .2f, .2f), CPU_Pos);
@@ -119,7 +134,7 @@ public class Main {
 				
 				if(select.equals("RAM")){
 					//add code to perform whatever tricks you want
-					text1.setText("RAM");
+					text1.setText(partName+"RAM");
 					Transform3D RAM_Vector = new Transform3D();
 					RAM_Vector.setTranslation(new Vector3d(.3,.13,-.1));
 					engine.addShape(0.02f, 0.05f, 0.3f, new Color3f(.4f, .2f, .1f), RAM_Vector);
@@ -129,7 +144,7 @@ public class Main {
 				
 				if(select.equals("Graphics Card")){
 					//add code to perform whatever tricks you want
-					text1.setText("Graphics Card"); 
+					text1.setText(partName+"Graphics Card"); 
 					Transform3D GPU_Vector  =new Transform3D();
 					//shorten, shrink width, raise, move -x
 					GPU_Vector.setTranslation(new Vector3d(-.2,.13,.3));
@@ -140,7 +155,7 @@ public class Main {
 				
 				if(select.equals("Power Supply")){
 					//add code to perform whatever tricks you want
-					text1.setText("Power Supply"); 
+					text1.setText(partName+"Power Supply"); 
 					Transform3D PSU_Vector = new Transform3D();
 					PSU_Vector.setTranslation(new Vector3d(-.3,-.1,0));
 					engine.addShape(0.1f, 0.1f, 0.4f, new Color3f(.4f, .2f, .1f), PSU_Vector);
@@ -149,13 +164,13 @@ public class Main {
 				}
 				
 			}});
-		button1.addItem(new String("Motherboard"));
-		button1.addItem(new String("CPU"));
-		button1.addItem(new String("RAM"));
-		button1.addItem(new String("Graphics Card"));
-		button1.addItem(new String("Power Supply"));
-		button1.setEnabled(true);
-		button1.setVisible(true);
+		menu1.addItem(new String("Motherboard"));
+		menu1.addItem(new String("CPU"));
+		menu1.addItem(new String("RAM"));
+		menu1.addItem(new String("Graphics Card"));
+		menu1.addItem(new String("Power Supply"));
+		menu1.setEnabled(true);
+		menu1.setVisible(true);
 		
 		
 		
@@ -163,6 +178,8 @@ public class Main {
 		frame2.add(rightPanel);
 		rightPanel.repaint();
 		rightPanel.setVisible(true);
+		bottomPanel.repaint();
+		bottomPanel.setVisible(true);
 		frame2.setVisible(true);
 		
 	}
