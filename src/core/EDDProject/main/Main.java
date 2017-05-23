@@ -139,7 +139,7 @@ public class Main {
 					Transform3D RAM_Vector = new Transform3D();
 					RAM_Vector.setTranslation(new Vector3d(.3,.13,-.1));
 					engine.addShape(0.02f, 0.05f, 0.3f, new Color3f(.4f, .2f, .1f), RAM_Vector);
-					engine.removeShape(test);//for testing purposes
+//					engine.removeShape(test);//for testing purposes
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}

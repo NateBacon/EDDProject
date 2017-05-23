@@ -30,15 +30,20 @@ import com.sun.j3d.utils.universe.SimpleUniverse;
 
 public class Engine extends SimpleUniverse {
 	
-	private PickCanvas pickCanvas;//not sure if we need this yet
+	private PickCanvas pickCanvas;//we will need this
 	
 	private Canvas3D canvas;//this is what will display everything
 	private BranchGroup group;//the root group
 	private TransformGroup transformGroup;//the transform group
 	private Container container;//the container we want to contain the canvas in
+	
+	//used for mouse movement
 	private MouseTranslate translateBehaviour;
 	private MouseRotate rotateBehaviour;
+	
 	private Transform3D transform;
+	
+	//used to store all possible shapes
 	private ArrayList<Node> nodeList;
 	
 	public Engine(Canvas3D canvasIn, Container containerIn){
@@ -121,25 +126,33 @@ public class Engine extends SimpleUniverse {
 		
 	}
 	
-	public int addShape(float width, float length, float height, Color3f color, Transform3D initPosition){//this just makes a rectangle right now
+	public int addShape(float width, float length, float height, Color3f color, Transform3D initPosition){//method to add rectangles to the scene
+		
+		//the material that the shape will have
 		Material m = new Material();
 		m.setEmissiveColor(color);
 		m.setLightingEnable(true);
 		Appearance app = new  Appearance();
 		app.setMaterial(m);
+		
+		//actually make the shape
 		Box box = new Box(width, length, height, app);
+		
+		//add the shape to the group and other bureaucracy
 		group.detach();
 		TransformGroup thisGroup  = new TransformGroup(initPosition);
 		nodeList.add(thisGroup);
 		thisGroup.addChild(box);
 		transformGroup.addChild(thisGroup);
 		this.addBranchGraph(group);
+		
+		//return the identifying number for this shape
 		return nodeList.indexOf(thisGroup);
 		
 		
 	}
 	
-	public int addShape(float radius, Color3f color, Transform3D initPosition){
+	public int addShape(float radius, Color3f color, Transform3D initPosition){//same thing here
 		Material m = new Material();
 		m.setEmissiveColor(color);
 		m.setLightingEnable(true);
@@ -155,14 +168,14 @@ public class Engine extends SimpleUniverse {
 		return nodeList.indexOf(thisGroup);
 	}
 	
-	public int addShape(int nodeIndex){
+	public int addShape(int nodeIndex){//add a shape that has already been created
 		group.detach();
 		transformGroup.addChild(nodeList.get(nodeIndex));
 		this.addBranchGraph(group);
 		return nodeIndex;
 	}
 	
-	public void removeShape(int nodeIndex){
+	public void removeShape(int nodeIndex){//remove a shape based on an identifying number
 		group.detach();
 		transformGroup.removeChild(nodeList.get(nodeIndex));
 		this.addBranchGraph(group);
