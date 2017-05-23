@@ -31,6 +31,7 @@ import com.sun.j3d.utils.universe.SimpleUniverse;
 public class Main {
 	
 	public static int WIDTH, HEIGHT;
+	public static int test;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -118,7 +119,7 @@ public class Main {
 					Transform3D ATX_Vector = new Transform3D();
 					ATX_Vector.setTranslation(new Vector3d(-.06,.06,.06));
 					engine.addShape(0.5f, 0.025f, 0.5f, new Color3f(.01f, .1f, .6f), ATX_Vector);
-					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
+//					engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); //SPHERE for testing purposes
 					
 				}
 				
@@ -127,7 +128,7 @@ public class Main {
 					text1.setText(partName+"CPU"); 
 					Transform3D CPU_Pos = new Transform3D();
 					CPU_Pos.setTranslation(new Vector3d(-.1,.09,-.22));
-					engine.addShape(0.09f, 0.01f, 0.09f, new Color3f(.5f, .2f, .2f), CPU_Pos);
+					test = engine.addShape(0.09f, 0.01f, 0.09f, new Color3f(.5f, .2f, .2f), CPU_Pos);
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}
@@ -138,6 +139,7 @@ public class Main {
 					Transform3D RAM_Vector = new Transform3D();
 					RAM_Vector.setTranslation(new Vector3d(.3,.13,-.1));
 					engine.addShape(0.02f, 0.05f, 0.3f, new Color3f(.4f, .2f, .1f), RAM_Vector);
+					engine.removeShape(test);//for testing purposes
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}

@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.media.j3d.AmbientLight;
 import javax.media.j3d.Appearance;
@@ -13,6 +14,7 @@ import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.DirectionalLight;
 import javax.media.j3d.Material;
+import javax.media.j3d.Node;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.swing.JFrame;
@@ -37,6 +39,7 @@ public class Engine extends SimpleUniverse {
 	private MouseTranslate translateBehaviour;
 	private MouseRotate rotateBehaviour;
 	private Transform3D transform;
+	private ArrayList<Node> nodeList;
 	
 	public Engine(Canvas3D canvasIn, Container containerIn){
 		
@@ -51,6 +54,8 @@ public class Engine extends SimpleUniverse {
 		group.setCapability(BranchGroup.ALLOW_CHILDREN_WRITE);
 		group.setCapability(BranchGroup.ALLOW_CHILDREN_READ);
 		group.setCapability(BranchGroup.ALLOW_DETACH);
+		
+		nodeList = new ArrayList<Node>();//adds a list of nodes for easy removal
 		
 		transformGroup = new TransformGroup();//create the transform group
 		//allow read and write for the transform
@@ -116,7 +121,7 @@ public class Engine extends SimpleUniverse {
 		
 	}
 	
-	public void addShape(float width, float length, float height, Color3f color, Transform3D initPosition){//this just makes a rectangle right now
+	public int addShape(float width, float length, float height, Color3f color, Transform3D initPosition){//this just makes a rectangle right now
 		Material m = new Material();
 		m.setEmissiveColor(color);
 		m.setLightingEnable(true);
@@ -125,15 +130,16 @@ public class Engine extends SimpleUniverse {
 		Box box = new Box(width, length, height, app);
 		group.detach();
 		TransformGroup thisGroup  = new TransformGroup(initPosition);
+		nodeList.add(thisGroup);
 		thisGroup.addChild(box);
 		transformGroup.addChild(thisGroup);
 		this.addBranchGraph(group);
-		
+		return nodeList.indexOf(thisGroup);
 		
 		
 	}
 	
-	public void addShape(float radius, Color3f color, Transform3D initPosition){
+	public int addShape(float radius, Color3f color, Transform3D initPosition){
 		Material m = new Material();
 		m.setEmissiveColor(color);
 		m.setLightingEnable(true);
@@ -142,8 +148,23 @@ public class Engine extends SimpleUniverse {
 		Sphere sphere = new Sphere(radius, app);
 		group.detach();
 		TransformGroup thisGroup = new  TransformGroup(initPosition);
+		nodeList.add(thisGroup);
 		thisGroup.addChild(sphere);
 		transformGroup.addChild(thisGroup);
+		this.addBranchGraph(group);
+		return nodeList.indexOf(thisGroup);
+	}
+	
+	public int addShape(int nodeIndex){
+		group.detach();
+		transformGroup.addChild(nodeList.get(nodeIndex));
+		this.addBranchGraph(group);
+		return nodeIndex;
+	}
+	
+	public void removeShape(int nodeIndex){
+		group.detach();
+		transformGroup.removeChild(nodeList.get(nodeIndex));
 		this.addBranchGraph(group);
 	}
 	
