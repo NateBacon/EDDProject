@@ -94,10 +94,11 @@ public class Main {
 		menu2.setBounds(50, 170, 300, 50);
 		rightPanel.setBackground(Color.gray);
 		
-		partDescription_Label.setBounds(100,20,200,40);
+		partDescription_Label.setBounds(10,10,100,40);
 		rightPanel.add(menu1);
 		rightPanel.add(menu2);
 		rightPanel.add(text1);
+		bottomPanel.add(partDescription_Label);
 		//button1.setLocation(0, 0);
 		//rightPanel.add(button1);
 		
