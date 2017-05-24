@@ -52,11 +52,11 @@ public class Main {
 		
 		daPanel.setSize((WIDTH/2)+100, HEIGHT/2+100); //engine needs to be 600 by 400
 		String partName = "PC Component: ";
-		String partDescription_Text = "Description: ";
+		String partDescription = "Description: ";
 		text1.setText(partName);
 		text1.setForeground(Color.BLACK);
 		text1.setBorder(null);
-		partDescription_Label.setText(partDescription_Text);
+		partDescription_Label.setText(partDescription);
 		partDescription_Label.setForeground(Color.BLACK);
 		partDescription_Label.setBorder(null);
 		frame2.setLayout(null);
@@ -65,6 +65,7 @@ public class Main {
 		rightPanel.setLayout(null);
 		rightPanel.setSize((WIDTH/2)-100, HEIGHT);
 		JPanel bottomPanel = (JPanel)frame2.getContentPane();
+		//JPanel bottomPanel = new JPanel();
 		bottomPanel.setLayout(null);
 		bottomPanel.setSize((WIDTH/2)+100,(HEIGHT/2)-100);
 		
@@ -94,17 +95,19 @@ public class Main {
 		menu2.setBounds(50, 170, 300, 50);
 		rightPanel.setBackground(Color.gray);
 		
-		partDescription_Label.setBounds(10,10,100,40);
+		partDescription_Label.setBounds(10,500,200,40);
+		bottomPanel.setLocation(0,(HEIGHT/2)+300);
+		bottomPanel.setBackground(Color.BLUE);	
+		bottomPanel.add(partDescription_Label);
+		partDescription_Label.setVisible(true);
+
 		rightPanel.add(menu1);
 		rightPanel.add(menu2);
 		rightPanel.add(text1);
-		bottomPanel.add(partDescription_Label);
+		//bottomPanel.add(partDescription_Label);
 		//button1.setLocation(0, 0);
 		//rightPanel.add(button1);
 		
-		bottomPanel.setLocation(0,(HEIGHT/2)+300);
-		bottomPanel.setBackground(Color.lightGray);	
-		bottomPanel.add(partDescription_Label);
 		
 		menu1.addActionListener(new ActionListener(){
 			
