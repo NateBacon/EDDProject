@@ -23,6 +23,7 @@ import javax.vecmath.Vector3f;
 
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 import com.sun.j3d.utils.behaviors.mouse.MouseTranslate;
+import com.sun.j3d.utils.behaviors.mouse.MouseZoom;
 import com.sun.j3d.utils.geometry.Box;
 import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.picking.PickCanvas;
@@ -40,6 +41,7 @@ public class Engine extends SimpleUniverse {
 	//used for mouse movement
 	private MouseTranslate translateBehaviour;
 	private MouseRotate rotateBehaviour;
+	private MouseZoom zoomBehaviour;
 	
 	private Transform3D transform;
 	
@@ -72,15 +74,18 @@ public class Engine extends SimpleUniverse {
 		
 		rotateBehaviour = new MouseRotate();//create the rotation mouse behaviour
 		translateBehaviour = new MouseTranslate();//create the translation mouse behaviour
+		zoomBehaviour = new MouseZoom();//create the zoom mouse behaviour
 		
 		//give the behaviours the transform group
 		rotateBehaviour.setTransformGroup(transformGroup);
 		translateBehaviour.setTransformGroup(transformGroup);
+		zoomBehaviour.setTransformGroup(transformGroup);
 		
 		//weird stuff that i dont know what it does
 		BoundingSphere bounds = new BoundingSphere();
 		rotateBehaviour.setSchedulingBounds(bounds);
 		translateBehaviour.setSchedulingBounds(bounds);
+		zoomBehaviour.setSchedulingBounds(bounds);
 		
 		//set the multipliers for  the rotation and translation
 		rotateBehaviour.setFactor(0.05);
@@ -89,6 +94,7 @@ public class Engine extends SimpleUniverse {
 		//add the behaviours to the transform group
 		transformGroup.addChild(rotateBehaviour);
 		transformGroup.addChild(translateBehaviour);
+		transformGroup.addChild(zoomBehaviour);
 		
 		//lazy lights
 		DirectionalLight light = new DirectionalLight(new Color3f(1.0f, 1.0f, 1.0f), new Vector3f(1.0f, 1.0f, 1.0f));
