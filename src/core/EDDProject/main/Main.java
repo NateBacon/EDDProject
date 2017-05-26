@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,7 +49,8 @@ public class Main {
 		JComboBox menu1 = new JComboBox();
 		JComboBox menu2 = new JComboBox();
 		JLabel text1 = new JLabel();
-		JLabel partDescription_Label = new JLabel();
+		JTextPane partDescription_Label = new JTextPane();
+		partDescription_Label.setFont(new Font("Arial",Font.BOLD,15));
 		
 		daPanel.setSize((WIDTH/2)+100, HEIGHT/2+100); //engine needs to be 600 by 400
 		String partName = "PC Component: ";
@@ -118,9 +120,10 @@ public class Main {
 		menu2.setBounds(50, 170, 300, 50);
 		rightPanel.setBackground(Color.gray);
 		
-		partDescription_Label.setBounds(10,500,200,40);
+		partDescription_Label.setBounds(10,420,500,200);
+		
 		bottomPanel.setLocation(0,(HEIGHT/2)+300);
-		bottomPanel.setBackground(Color.BLUE);	
+		bottomPanel.setBackground(Color.WHITE);	
 		bottomPanel.add(partDescription_Label);
 		partDescription_Label.setVisible(true);
 
@@ -151,6 +154,9 @@ public class Main {
 					//add code to perform whatever tricks you want
 					text1.setText(partName+"CPU"); 
 					engine.addNodeToScene(CPU);
+					partDescription_Label.setText("CPU"+partDescription+"The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
+							+ "/nThe CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
+							+ "logical, contral and input/output operations specified by the instructions.");
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}
