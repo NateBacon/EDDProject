@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,10 +18,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.JToolBar;
 import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
@@ -51,11 +48,11 @@ public class Main {
 		JComboBox menu1 = new JComboBox();
 		JComboBox menu2 = new JComboBox();
 		JLabel text1 = new JLabel();
-		JTextPane partDescription_Label = new JTextPane();
-		partDescription_Label.setFont(new Font("Arial", Font.BOLD, 15));
+		JLabel partDescription_Label = new JLabel();
+		
 		daPanel.setSize((WIDTH/2)+100, HEIGHT/2+100); //engine needs to be 600 by 400
 		String partName = "PC Component: ";
-		String partDescription = " Description: ";
+		String partDescription = "Description: ";
 		text1.setText(partName);
 		text1.setForeground(Color.BLACK);
 		text1.setBorder(null);
@@ -63,8 +60,6 @@ public class Main {
 		partDescription_Label.setForeground(Color.BLACK);
 		partDescription_Label.setBorder(null);
 		frame2.setLayout(null);
-		
-		JToolBar toolBar =new JToolBar("Get it");
 		
 		JPanel rightPanel = new JPanel();
 		rightPanel.setLayout(null);
@@ -100,17 +95,12 @@ public class Main {
 		menu2.setBounds(50, 170, 300, 50);
 		rightPanel.setBackground(Color.gray);
 		
-		partDescription_Label.setBounds(10,425,500,200);
+		partDescription_Label.setBounds(10,500,200,40);
 		bottomPanel.setLocation(0,(HEIGHT/2)+300);
-		bottomPanel.setBackground(Color.WHITE);	
+		bottomPanel.setBackground(Color.BLUE);	
 		bottomPanel.add(partDescription_Label);
 		partDescription_Label.setVisible(true);
 
-		frame2.add(toolBar,BorderLayout.PAGE_START);
-		toolBar.setPreferredSize(new Dimension(450,130));
-		
-		toolBar.setVisible(true);
-		
 		rightPanel.add(menu1);
 		rightPanel.add(menu2);
 		rightPanel.add(text1);
@@ -140,7 +130,6 @@ public class Main {
 				if(select.equals("CPU")){
 					//add code to perform whatever tricks you want
 					text1.setText(partName+"CPU"); 
-					partDescription_Label.setText("CPU"+partDescription+"The Central Processing Unit, or CPU, is the \"brains\" of the computer. /nThe CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, logical, contral and input/output operations specified by the instructions.");
 					Transform3D CPU_Pos = new Transform3D();
 					CPU_Pos.setTranslation(new Vector3d(-.1,.09,-.22));
 					test = engine.addShape(0.09f, 0.01f, 0.09f, new Color3f(.5f, .2f, .2f), CPU_Pos);
