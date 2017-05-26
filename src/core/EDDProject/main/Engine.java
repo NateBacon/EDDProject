@@ -132,7 +132,7 @@ public class Engine extends SimpleUniverse {
 		
 	}
 	
-	public int addShape(float width, float length, float height, Color3f color, Transform3D initPosition){//method to add rectangles to the scene
+	public int createShape(float width, float length, float height, Color3f color, Transform3D initPosition){//method to add rectangles to the scene
 		
 		//the material that the shape will have
 		Material m = new Material();
@@ -145,12 +145,9 @@ public class Engine extends SimpleUniverse {
 		Box box = new Box(width, length, height, app);
 		
 		//add the shape to the group and other bureaucracy
-		group.detach();
 		TransformGroup thisGroup  = new TransformGroup(initPosition);
 		nodeList.add(thisGroup);
 		thisGroup.addChild(box);
-		transformGroup.addChild(thisGroup);
-		this.addBranchGraph(group);
 		
 		//return the identifying number for this shape
 		return nodeList.indexOf(thisGroup);
@@ -158,27 +155,39 @@ public class Engine extends SimpleUniverse {
 		
 	}
 	
-	public int addShape(float radius, Color3f color, Transform3D initPosition){//same thing here
+	public int createShape(float radius, Color3f color, Transform3D initPosition){//same thing here
 		Material m = new Material();
 		m.setEmissiveColor(color);
 		m.setLightingEnable(true);
 		Appearance app = new  Appearance();
 		app.setMaterial(m);
 		Sphere sphere = new Sphere(radius, app);
-		group.detach();
 		TransformGroup thisGroup = new  TransformGroup(initPosition);
 		nodeList.add(thisGroup);
 		thisGroup.addChild(sphere);
-		transformGroup.addChild(thisGroup);
-		this.addBranchGraph(group);
 		return nodeList.indexOf(thisGroup);
 	}
 	
-	public int addShape(int nodeIndex){//add a shape that has already been created
+	public int addNodeToScene(int nodeIndex){//add a shape that has already been created
 		group.detach();
-		transformGroup.addChild(nodeList.get(nodeIndex));
+		Node node = nodeList.get(nodeIndex);
+		if (node.getParent() == null){
+			transformGroup.addChild(nodeList.get(nodeIndex));
+		}
 		this.addBranchGraph(group);
 		return nodeIndex;
+	}
+	
+	public int joinNodes(int[] nodes){
+		TransformGroup parentGroup = new TransformGroup();
+		
+		for(int i = 0; i < nodes.length; i++){
+			Node tempNode = nodeList.get(nodes[i]);
+			parentGroup.addChild(tempNode);
+		}
+		
+		nodeList.add(parentGroup);
+		return nodeList.indexOf(parentGroup);
 	}
 	
 	public void removeShape(int nodeIndex){//remove a shape based on an identifying number
