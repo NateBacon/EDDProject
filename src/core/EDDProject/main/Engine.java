@@ -3,9 +3,12 @@ package core.EDDProject.main;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import javax.media.j3d.AmbientLight;
 import javax.media.j3d.Appearance;
@@ -15,6 +18,7 @@ import javax.media.j3d.Canvas3D;
 import javax.media.j3d.DirectionalLight;
 import javax.media.j3d.Material;
 import javax.media.j3d.Node;
+import javax.media.j3d.Shape3D;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.swing.JFrame;
@@ -25,9 +29,12 @@ import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 import com.sun.j3d.utils.behaviors.mouse.MouseTranslate;
 import com.sun.j3d.utils.behaviors.mouse.MouseZoom;
 import com.sun.j3d.utils.geometry.Box;
+import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.picking.PickCanvas;
+import com.sun.j3d.utils.picking.PickResult;
 import com.sun.j3d.utils.universe.SimpleUniverse;
+
 
 public class Engine extends SimpleUniverse {
 	
@@ -47,6 +54,8 @@ public class Engine extends SimpleUniverse {
 	
 	//used to store all possible shapes
 	private ArrayList<Node> nodeList;
+	
+	private int pickedNode;
 	
 	public Engine(Canvas3D canvasIn, Container containerIn){
 		
@@ -116,6 +125,35 @@ public class Engine extends SimpleUniverse {
 		//create the pick canvas
 		pickCanvas = new PickCanvas(canvas, group);
 		pickCanvas.setMode(PickCanvas.GEOMETRY);
+		canvas.addMouseListener(new MouseAdapter(){//add picking capability
+			
+			public void mouseClicked(MouseEvent e){
+				pickCanvas.setShapeLocation(e);
+				PickResult result = pickCanvas.pickClosest();
+				if (result == null){
+					System.out.println("This should throw a general kind of defaultt statement");
+				} else {
+					
+					TransformGroup t = (TransformGroup) result.getNode(PickResult.TRANSFORM_GROUP);//grab the transform group that the user picked
+					
+					if (t != null){
+						
+						for (Node node : nodeList){
+							
+							if(t.equals(node)){
+								System.out.println("This works");
+								pickedNode = nodeList.indexOf(node);//set pickedNode to the index of the node picked
+								return;
+							}
+						}
+						
+					} else {
+						System.out.println("We should never see this");
+					}
+				}
+			}
+			
+		});
 		
 		//if our container is a JFrame, set the window to exit on close
 		if (container instanceof JFrame){
@@ -132,6 +170,10 @@ public class Engine extends SimpleUniverse {
 		
 	}
 	
+	public int getPickedNode(){
+		return pickedNode;//picked node should be used to compare with the shapes created in the main class in order to update information on the screen based on a node picked by the user
+	}
+	
 	public int createShape(float width, float length, float height, Color3f color, Transform3D initPosition){//method to add rectangles to the scene
 		
 		//the material that the shape will have
@@ -146,6 +188,7 @@ public class Engine extends SimpleUniverse {
 		
 		//add the shape to the group and other bureaucracy
 		TransformGroup thisGroup  = new TransformGroup(initPosition);
+		thisGroup.setCapability(TransformGroup.ENABLE_PICK_REPORTING);
 		nodeList.add(thisGroup);
 		thisGroup.addChild(box);
 		
@@ -163,6 +206,7 @@ public class Engine extends SimpleUniverse {
 		app.setMaterial(m);
 		Sphere sphere = new Sphere(radius, app);
 		TransformGroup thisGroup = new  TransformGroup(initPosition);
+		thisGroup.setCapability(TransformGroup.ENABLE_PICK_REPORTING);
 		nodeList.add(thisGroup);
 		thisGroup.addChild(sphere);
 		return nodeList.indexOf(thisGroup);
@@ -180,6 +224,7 @@ public class Engine extends SimpleUniverse {
 	
 	public int joinNodes(int[] nodes){
 		TransformGroup parentGroup = new TransformGroup();
+		parentGroup.setCapability(TransformGroup.ENABLE_PICK_REPORTING);
 		
 		for(int i = 0; i < nodes.length; i++){
 			Node tempNode = nodeList.get(nodes[i]);
@@ -195,5 +240,6 @@ public class Engine extends SimpleUniverse {
 		transformGroup.removeChild(nodeList.get(nodeIndex));
 		this.addBranchGraph(group);
 	}
+	
 	
 }
