@@ -21,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
@@ -190,8 +192,11 @@ public class Main {
 		menu1.setEnabled(true);
 		menu1.setVisible(true);
 		
-		
-		
+		frame2.add(new ToolBar());
+		 
+        //Display the window.
+        frame2.pack();
+        frame2.setVisible(true);
 		
 		frame2.add(rightPanel);
 		rightPanel.repaint();
@@ -200,8 +205,27 @@ public class Main {
 		bottomPanel.setVisible(true);
 		frame2.setVisible(true);
 		
+		//private static void createAndShowGUI() {
+	        //Create and set up the window.
+	        //JFrame frame2 = new JFrame("ToolBarDemo");
+	        //frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	 
+	        //Add content to the window.
+	        
+	    //}
+		//Schedule a job for the event dispatch thread:
+        //creating and showing this application's GUI.
+        //SwingUtilities.invokeLater(new Runnable() {
+          //  public void run() {
+                //Turn off metal's use of bold fonts
+           // UIManager.put("swing.boldMetal", Boolean.FALSE);
+            //createAndShowGUI();
+           // }
+		 //}	       
 	}
-	
+}
+
+
 
 	
-}
+
