@@ -48,6 +48,9 @@ public class Main {
 		JPanel daPanel = (JPanel) frame2.getContentPane();	
 		JComboBox menu1 = new JComboBox();
 		JComboBox menu2 = new JComboBox();
+		JComboBox menu3 = new JComboBox();
+		JComboBox menu4 = new JComboBox();
+		JComboBox menu5 = new JComboBox();
 		JLabel text1 = new JLabel();
 		JTextPane partDescription_Label = new JTextPane();
 		partDescription_Label.setFont(new Font("Arial",Font.BOLD,15));
@@ -118,6 +121,9 @@ public class Main {
 		rightPanel.setLocation((WIDTH/2)+100, 0);
 		menu1.setBounds(50, 80, 300, 50);
 		menu2.setBounds(50, 170, 300, 50);
+		menu3.setBounds(50, 260, 300, 50);
+		menu4.setBounds(50, 350, 300, 50);
+		menu5.setBounds(50, 440, 300, 50);
 		rightPanel.setBackground(Color.gray);
 		
 		partDescription_Label.setBounds(10,420,500,200);
@@ -129,6 +135,9 @@ public class Main {
 
 		rightPanel.add(menu1);
 		rightPanel.add(menu2);
+		rightPanel.add(menu3);
+		rightPanel.add(menu4);
+		rightPanel.add(menu5);
 		rightPanel.add(text1);
 		//bottomPanel.add(partDescription_Label);
 		//button1.setLocation(0, 0);
@@ -143,17 +152,21 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cB = (JComboBox)e.getSource();
 				String select = (String)cB.getSelectedItem();
-				if(select.equals("Motherboard")){
+				if(select.equals("Motherboard 1")){
 					//add code to perform whatever tricks you want
-					text1.setText(partName+"Motherboard"); 
+					text1.setText(partName+"Motherboard 1"); 
 					engine.addNodeToScene(motherboard);
 					
 				}
 				
-				if(select.equals("CPU")){
+				if(select.equals("Motherboard 2")){
 					//add code to perform whatever tricks you want
-					text1.setText(partName+"CPU"); 
-					engine.addNodeToScene(CPU);
+					text1.setText(partName+"Motherboard 2");
+					
+					//add a diff motherboard
+					//engine.addNodeToScene(CPU);
+					
+					//set text for motherboard
 					partDescription_Label.setText("CPU"+partDescription+"The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
 							+ "/nThe CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
 							+ "logical, contral and input/output operations specified by the instructions.");
@@ -161,36 +174,94 @@ public class Main {
 					
 				}
 				
-				if(select.equals("RAM")){
+				if(select.equals("Motherboard 3")){
 					//add code to perform whatever tricks you want
-					text1.setText(partName+"RAM");
-					engine.addNodeToScene(RAM);
+					text1.setText(partName+"Motherboard 3");
+					//engine.addNodeToScene(RAM);
 				}
 				
-				if(select.equals("Graphics Card")){
+				if(select.equals("Motherboard 4")){
 					//add code to perform whatever tricks you want
-					text1.setText(partName+"Graphics Card"); 
+					text1.setText(partName+"Motherboard 4"); 
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
-					engine.addNodeToScene(GPU);
+					//engine.addNodeToScene(GPU);
 				}
 				
-				if(select.equals("Power Supply")){
+				if(select.equals("Motherboard 5")){
 					//add code to perform whatever tricks you want
-					text1.setText(partName+"Power Supply"); 
-					engine.addNodeToScene(PSU);
+					text1.setText(partName+"Motherboard 5"); 
+					//engine.addNodeToScene(PSU);
 					
 				}
 				
 			}});
-		menu1.addItem(new String("Motherboard"));
-		menu1.addItem(new String("CPU"));
-		menu1.addItem(new String("RAM"));
-		menu1.addItem(new String("Graphics Card"));
-		menu1.addItem(new String("Power Supply"));
+		menu1.addItem(new String("Motherboard 1"));
+		menu1.addItem(new String("Motherboard 2"));
+		menu1.addItem(new String("Motherboard 3"));
+		menu1.addItem(new String("Motherboard 4"));
+		menu1.addItem(new String("Motherboard 5"));
 		menu1.setEnabled(true);
 		menu1.setVisible(true);
 		
+		menu2.addActionListener(new ActionListener(){
+			
+			
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox cB = (JComboBox)e.getSource();
+				String select = (String)cB.getSelectedItem();
+				if(select.equals("CPU 1")){
+					//add code to perform whatever tricks you want
+					text1.setText(partName+"CPU 1"); 
+					//engine.addNodeToScene(motherboard);
+					
+				}
+				
+				if(select.equals("CPU 2")){
+					//add code to perform whatever tricks you want
+					text1.setText(partName+"CPU 2");
+					
+					//add a diff motherboard
+					engine.addNodeToScene(CPU);
+					
+					//set text for motherboard
+					partDescription_Label.setText("CPU "+partDescription+" The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
+							+ "The CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
+							+ "logical, contral and input/output operations specified by the instructions.");
+					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
+					
+				}
+				
+				if(select.equals("CPU 3")){
+					//add code to perform whatever tricks you want
+					text1.setText(partName+"CPU 3");
+					//engine.addNodeToScene(RAM);
+				}
+				
+				if(select.equals("CPU 4")){
+					//add code to perform whatever tricks you want
+					text1.setText(partName+"CPU 4"); 
+					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
+					//engine.addNodeToScene(GPU);
+				}
+				
+				if(select.equals("CPU 5")){
+					//add code to perform whatever tricks you want
+					text1.setText(partName+"CPU 5"); 
+					//engine.addNodeToScene(PSU);
+					
+				}
+				
+			}});
 		
+		menu2.addItem(new String("CPU 1"));
+		menu2.addItem(new String("CPU 2"));
+		menu2.addItem(new String("CPU 3"));
+		menu2.addItem(new String("CPU 4"));
+		menu2.addItem(new String("CPU 5"));
+		menu2.setEnabled(true);
+		menu2.setVisible(true);
 		
 		
 		frame2.add(rightPanel);
