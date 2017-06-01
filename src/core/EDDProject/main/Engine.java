@@ -34,6 +34,7 @@ import com.sun.j3d.utils.geometry.Sphere;
 import com.sun.j3d.utils.picking.PickCanvas;
 import com.sun.j3d.utils.picking.PickResult;
 import com.sun.j3d.utils.universe.SimpleUniverse;
+import com.sun.j3d.utils.universe.ViewingPlatform;
 
 
 public class Engine extends SimpleUniverse {
@@ -57,13 +58,14 @@ public class Engine extends SimpleUniverse {
 	
 	private int pickedNode;
 	
-	public Engine(Canvas3D canvasIn, Container containerIn){
+	public Engine(Canvas3D canvasIn, Container containerIn, ViewingPlatform platform){
 		
 		super(canvasIn);//construct the SimpleUniverse
 		canvas = canvasIn;
 		container = containerIn;
 		container.add(canvas);//add the canvas to the container
 		canvas.setSize(new Dimension(600, 400));//set the canvas to 600 by 400
+		
 		
 		group = new BranchGroup();//create the root group
 		group.setCapability(BranchGroup.ALLOW_CHILDREN_EXTEND);
@@ -92,6 +94,7 @@ public class Engine extends SimpleUniverse {
 		
 		//weird stuff that i dont know what it does
 		BoundingSphere bounds = new BoundingSphere();
+		bounds.setRadius(10000);
 		rotateBehaviour.setSchedulingBounds(bounds);
 		translateBehaviour.setSchedulingBounds(bounds);
 		zoomBehaviour.setSchedulingBounds(bounds);
@@ -106,7 +109,7 @@ public class Engine extends SimpleUniverse {
 		transformGroup.addChild(zoomBehaviour);
 		
 		//lazy lights
-		DirectionalLight light = new DirectionalLight(new Color3f(1.0f, 1.0f, 1.0f), new Vector3f(1.0f, 1.0f, 1.0f));
+		DirectionalLight light = new DirectionalLight(new Color3f(1.0f, 1.0f, 1.0f), new Vector3f(10f, 10f, 10f));
 		AmbientLight temp = new AmbientLight(new Color3f(1.0f, 1.0f, 1.0f));
 		temp.setInfluencingBounds(bounds);
 		light.setInfluencingBounds(bounds);
@@ -117,7 +120,7 @@ public class Engine extends SimpleUniverse {
 		group.addChild(transformGroup);
 		
 		//get  the viewpoint
-		this.getViewingPlatform().setNominalViewingTransform();
+		this.getViewingPlatform().setNominalViewingTransform();;
 		
 		//add the group to the universe
 		this.addBranchGraph(group);
@@ -215,6 +218,17 @@ public class Engine extends SimpleUniverse {
 	public int addNodeToScene(int nodeIndex){//add a shape that has already been created
 		group.detach();
 		Node node = nodeList.get(nodeIndex);
+		if (node.getParent() == null){
+			transformGroup.addChild(nodeList.get(nodeIndex));
+		}
+		this.addBranchGraph(group);
+		return nodeIndex;
+	}
+	
+	public int addNodeToScene(Node node){
+		group.detach();
+		nodeList.add(node);
+		int nodeIndex = nodeList.indexOf(node);
 		if (node.getParent() == null){
 			transformGroup.addChild(nodeList.get(nodeIndex));
 		}

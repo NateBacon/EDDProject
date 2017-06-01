@@ -10,7 +10,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 
+import javax.media.j3d.BoundingSphere;
+import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Transform3D;
 import javax.swing.AbstractButton;
@@ -27,7 +31,12 @@ import javax.vecmath.Color3f;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
+import com.sun.j3d.loaders.IncorrectFormatException;
+import com.sun.j3d.loaders.ParsingErrorException;
+import com.sun.j3d.loaders.Scene;
+import com.sun.j3d.loaders.objectfile.ObjectFile;
 import com.sun.j3d.utils.universe.SimpleUniverse;
+import com.sun.j3d.utils.universe.ViewingPlatform;
 
 
 
@@ -74,7 +83,27 @@ public class Main {
 		bottomPanel.setSize((WIDTH/2)+100,(HEIGHT/2)-100);
 		
 		Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
-		Engine engine = new Engine(canvas, daPanel);
+		BoundingSphere bounds = new BoundingSphere();
+		bounds.setRadius(1000);
+		ViewingPlatform view = new ViewingPlatform();
+		view.setCapability(ViewingPlatform.ALLOW_BOUNDS_WRITE);
+		view.setBounds(bounds);
+		Engine engine = new Engine(canvas, daPanel, view);
+		File file = new File("C:\\Users\\baker\\OneDrive\\Documents\\GitHub\\EDDProject\\lib");
+		ObjectFile obj = new ObjectFile();
+		Scene scene = null;
+		try {
+			scene = obj.load("C:\\Users\\baker\\OneDrive\\Documents\\GitHub\\EDDProject\\lib\\original.stl.obj");
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IncorrectFormatException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ParsingErrorException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Transform3D Vector01 =  new Transform3D();
 		Transform3D TestBench_Top_Vector =  new Transform3D();
 		Transform3D TestBench_Leg1_Vector =  new Transform3D();
@@ -87,32 +116,34 @@ public class Main {
 		int testBenchLeg1 = engine.createShape(0.025f, 0.1f, 0.5f, new Color3f(.2f, .05f, .01f), TestBench_Leg1_Vector );
 		int testBenchLeg2 = engine.createShape(0.025f, 0.1f, 0.5f, new Color3f(.2f, .05f, .01f), TestBench_Leg2_Vector );
 		int[] test = {testBenchTop, testBenchLeg1, testBenchLeg2};
-		int t1 = engine.addNodeToScene(engine.joinNodes(test));
+		//int t1 = engine.addNodeToScene(engine.joinNodes(test));
+		BranchGroup iGroup = scene.getSceneGroup();
+		int test1 = engine.addNodeToScene(iGroup);
 		
 		//motherboard
 		Transform3D ATX_Vector = new Transform3D();
 		ATX_Vector.setTranslation(new Vector3d(-.06,.06,.06));
-		int motherboard = engine.createShape(0.5f, 0.025f, 0.5f, new Color3f(.01f, .1f, .6f), ATX_Vector);
+		//int motherboard = engine.createShape(0.5f, 0.025f, 0.5f, new Color3f(.01f, .1f, .6f), ATX_Vector);
 
 		//CPU
 		Transform3D CPU_Pos = new Transform3D();
 		CPU_Pos.setTranslation(new Vector3d(-.1,.09,-.22));
-		int CPU = engine.createShape(0.09f, 0.01f, 0.09f, new Color3f(.5f, .2f, .2f), CPU_Pos);
+		//int CPU = engine.createShape(0.09f, 0.01f, 0.09f, new Color3f(.5f, .2f, .2f), CPU_Pos);
 		
 		//RAM
 		Transform3D RAM_Vector = new Transform3D();
 		RAM_Vector.setTranslation(new Vector3d(.3,.13,-.1));
-		int RAM = engine.createShape(0.02f, 0.05f, 0.3f, new Color3f(.4f, .2f, .1f), RAM_Vector);
+//		int RAM = engine.createShape(0.02f, 0.05f, 0.3f, new Color3f(.4f, .2f, .1f), RAM_Vector);
 		
 		//GPU
 		Transform3D GPU_Vector  =new Transform3D();
 		GPU_Vector.setTranslation(new Vector3d(-.2,.13,.3));
-		int GPU = engine.createShape(0.35f, 0.07f, 0.04f, new Color3f(.4f, 1f, .1f), GPU_Vector);
+//		int GPU = engine.createShape(0.35f, 0.07f, 0.04f, new Color3f(.4f, 1f, .1f), GPU_Vector);
 		
 		//PSU
 		Transform3D PSU_Vector = new Transform3D();
 		PSU_Vector.setTranslation(new Vector3d(-.3,-.1,0));
-		int PSU = engine.createShape(0.1f, 0.1f, 0.4f, new Color3f(.4f, .2f, .1f), PSU_Vector);
+//		int PSU = engine.createShape(0.1f, 0.1f, 0.4f, new Color3f(.4f, .2f, .1f), PSU_Vector);
 		
 		
 		text1.setBounds(100,20,200,40);
@@ -148,14 +179,14 @@ public class Main {
 				if(select.equals("Motherboard")){
 					//add code to perform whatever tricks you want
 					text1.setText(partName+"Motherboard"); 
-					engine.addNodeToScene(motherboard);
+//					engine.addNodeToScene(motherboard);
 					
 				}
 				
 				if(select.equals("CPU")){
 					//add code to perform whatever tricks you want
 					text1.setText(partName+"CPU"); 
-					engine.addNodeToScene(CPU);
+//					engine.addNodeToScene(CPU);
 					partDescription_Label.setText("CPU"+partDescription+"The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
 							+ "/nThe CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
 							+ "logical, contral and input/output operations specified by the instructions.");
@@ -166,20 +197,20 @@ public class Main {
 				if(select.equals("RAM")){
 					//add code to perform whatever tricks you want
 					text1.setText(partName+"RAM");
-					engine.addNodeToScene(RAM);
+//					engine.addNodeToScene(RAM);
 				}
 				
 				if(select.equals("Graphics Card")){
 					//add code to perform whatever tricks you want
 					text1.setText(partName+"Graphics Card"); 
 					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
-					engine.addNodeToScene(GPU);
+//					engine.addNodeToScene(GPU);
 				}
 				
 				if(select.equals("Power Supply")){
 					//add code to perform whatever tricks you want
 					text1.setText(partName+"Power Supply"); 
-					engine.addNodeToScene(PSU);
+//					engine.addNodeToScene(PSU);
 					
 				}
 				
