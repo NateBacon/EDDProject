@@ -23,6 +23,8 @@ import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.swing.JFrame;
 import javax.vecmath.Color3f;
+import javax.vecmath.Point3d;
+import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
@@ -58,7 +60,7 @@ public class Engine extends SimpleUniverse {
 	
 	private int pickedNode;
 	
-	public Engine(Canvas3D canvasIn, Container containerIn, ViewingPlatform platform){
+	public Engine(Canvas3D canvasIn, Container containerIn){
 		
 		super(canvasIn);//construct the SimpleUniverse
 		canvas = canvasIn;
@@ -94,7 +96,6 @@ public class Engine extends SimpleUniverse {
 		
 		//weird stuff that i dont know what it does
 		BoundingSphere bounds = new BoundingSphere();
-		bounds.setRadius(10000);
 		rotateBehaviour.setSchedulingBounds(bounds);
 		translateBehaviour.setSchedulingBounds(bounds);
 		zoomBehaviour.setSchedulingBounds(bounds);
@@ -119,8 +120,11 @@ public class Engine extends SimpleUniverse {
 		//add the transform group to the root group
 		group.addChild(transformGroup);
 		
+		Transform3D looker = new Transform3D();
+		Vector3d lookFrom = new Vector3d(0.0, 1.0, -5.0);
+		looker.lookAt(new Point3d(0.0, 0.0, -5.0), new Point3d(0.0d, 0.0d, 0.0d), lookFrom);
 		//get  the viewpoint
-		this.getViewingPlatform().setNominalViewingTransform();;
+		this.getViewingPlatform().getViewPlatformTransform().setTransform(looker);
 		
 		//add the group to the universe
 		this.addBranchGraph(group);

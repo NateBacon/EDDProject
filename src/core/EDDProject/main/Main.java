@@ -16,7 +16,10 @@ import java.io.FileNotFoundException;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
+import javax.media.j3d.Group;
+import javax.media.j3d.Shape3D;
 import javax.media.j3d.Transform3D;
+import javax.media.j3d.TransformGroup;
 import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -42,20 +45,12 @@ import com.sun.j3d.utils.universe.ViewingPlatform;
 
 public class Main {
 	
-	public static int WIDTH, HEIGHT;
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		HEIGHT = 600;
-		WIDTH = 1000;
+	public static int WIDTH = 1000;
+	public static int HEIGHT = 600;
+	
+	public Main(){
 		
-		
-		
-		//Window frame = new Window(HEIGHT-100,WIDTH/2+100, "I <3 Luis");
-		Window frame2 = new Window(HEIGHT,WIDTH,"UI Window"); 
-		//Zelda zelda = new Zelda(frame2);
-		//frame2.getContentPane().setBackground(Color.gray);
-		
+		Window frame2 = new Window(HEIGHT,WIDTH,"UI Window");
 		JPanel daPanel = (JPanel) frame2.getContentPane();	
 		JComboBox menu1 = new JComboBox();
 		JComboBox menu2 = new JComboBox();
@@ -86,27 +81,47 @@ public class Main {
 		bottomPanel.setSize((WIDTH/2)+100,(HEIGHT/2)-100);
 		
 		Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
-		BoundingSphere bounds = new BoundingSphere();
-		bounds.setRadius(1000);
-		ViewingPlatform view = new ViewingPlatform();
-		view.setCapability(ViewingPlatform.ALLOW_BOUNDS_WRITE);
-		view.setBounds(bounds);
-		Engine engine = new Engine(canvas, daPanel, view);
-		File file = new File("C:\\Users\\baker\\OneDrive\\Documents\\GitHub\\EDDProject\\lib");
-		ObjectFile obj = new ObjectFile();
-		Scene scene = null;
-		try {
-			scene = obj.load("C:\\Users\\baker\\OneDrive\\Documents\\GitHub\\EDDProject\\lib\\original.stl.obj");
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IncorrectFormatException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (ParsingErrorException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		Engine engine = new Engine(canvas, daPanel);
+		
+		//Import the obj files from libs
+		ObjectFile motherboardModel = new ObjectFile();
+		ObjectFile cpuModel = new ObjectFile();
+		ObjectFile gpuModel = new ObjectFile();
+		ObjectFile psuModel = new ObjectFile();
+		
+		Scene[] imports = new Scene[4];
+		try{
+			imports[0] = loadObjFile(motherboardModel, "motherboard.obj");
+			imports[1] = loadObjFile(cpuModel, "cpu.obj");
+			imports[2] = loadObjFile(gpuModel, "gpu.obj");
+			imports[3] = loadObjFile(psuModel, "psu.obj");
+		} catch(Exception e){
+			e.printStackTrace(System.out);
 		}
+		
+		//do scaling and all stuff here
+		//
+		//
+		//
+		//
+		//
+		
+		BranchGroup importGroup = new BranchGroup();
+		Shape3D[] shapes = new Shape3D[4];
+		Transform3D scale = new Transform3D();
+		
+		scale.setScale(0.1);
+		
+		for (int i = 0; i < imports.length; i++){
+			if (imports[i] != null){
+				importGroup = imports[i].getSceneGroup();
+				shapes[i] = (Shape3D) importGroup.getChild(0).cloneNode(true);
+				
+				TransformGroup temp = new TransformGroup(scale);
+				temp.addChild(shapes[i]);
+				engine.addNodeToScene(temp);
+		}
+		
 		Transform3D Vector01 =  new Transform3D();
 		Transform3D TestBench_Top_Vector =  new Transform3D();
 		Transform3D TestBench_Leg1_Vector =  new Transform3D();
@@ -120,8 +135,6 @@ public class Main {
 		int testBenchLeg2 = engine.createShape(0.025f, 0.1f, 0.5f, new Color3f(.2f, .05f, .01f), TestBench_Leg2_Vector );
 		int[] test = {testBenchTop, testBenchLeg1, testBenchLeg2};
 		//int t1 = engine.addNodeToScene(engine.joinNodes(test));
-		BranchGroup iGroup = scene.getSceneGroup();
-		int test1 = engine.addNodeToScene(iGroup);
 		
 		//motherboard
 		Transform3D ATX_Vector = new Transform3D();
@@ -187,67 +200,43 @@ public class Main {
 				String select = (String)cB.getSelectedItem();
 				if(select.equals("Motherboard 1")){
 					//add code to perform whatever tricks you want
-<<<<<<< HEAD
+
 					text1.setText(partName+"Motherboard"); 
 //					engine.addNodeToScene(motherboard);
-=======
-					text1.setText(partName+"Motherboard 1"); 
-					engine.addNodeToScene(motherboard);
->>>>>>> origin/master
+
+
 					
 				}
 				
 				if(select.equals("Motherboard 2")){
 					//add code to perform whatever tricks you want
-<<<<<<< HEAD
+
 					text1.setText(partName+"CPU"); 
 //					engine.addNodeToScene(CPU);
-=======
-					text1.setText(partName+"Motherboard 2");
-					
-					//add a diff motherboard
-					//engine.addNodeToScene(CPU);
-					
-					//set text for motherboard
->>>>>>> origin/master
 					partDescription_Label.setText("CPU"+partDescription+"The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
 							+ "/nThe CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
 							+ "logical, contral and input/output operations specified by the instructions.");
-					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
 					
 				}
 				
 				if(select.equals("Motherboard 3")){
 					//add code to perform whatever tricks you want
-<<<<<<< HEAD
 					text1.setText(partName+"RAM");
 //					engine.addNodeToScene(RAM);
-=======
-					text1.setText(partName+"Motherboard 3");
-					//engine.addNodeToScene(RAM);
->>>>>>> origin/master
+
 				}
 				
 				if(select.equals("Motherboard 4")){
+					
 					//add code to perform whatever tricks you want
 					text1.setText(partName+"Motherboard 4"); 
-					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
-<<<<<<< HEAD
-//					engine.addNodeToScene(GPU);
-=======
-					//engine.addNodeToScene(GPU);
->>>>>>> origin/master
+;
 				}
 				
 				if(select.equals("Motherboard 5")){
 					//add code to perform whatever tricks you want
-<<<<<<< HEAD
 					text1.setText(partName+"Power Supply"); 
 //					engine.addNodeToScene(PSU);
-=======
-					text1.setText(partName+"Motherboard 5"); 
-					//engine.addNodeToScene(PSU);
->>>>>>> origin/master
 					
 				}
 				
@@ -260,13 +249,6 @@ public class Main {
 		menu1.setEnabled(true);
 		menu1.setVisible(true);
 		
-<<<<<<< HEAD
-		frame2.add(new ToolBar());
-		 
-        //Display the window.
-        frame2.pack();
-        frame2.setVisible(true);
-=======
 		menu2.addActionListener(new ActionListener(){
 			
 			
@@ -287,7 +269,7 @@ public class Main {
 					text1.setText(partName+"CPU 2");
 					
 					//add a diff motherboard
-					engine.addNodeToScene(CPU);
+//					engine.addNodeToScene(CPU);
 					
 					//set text for motherboard
 					partDescription_Label.setText("CPU "+partDescription+" The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
@@ -327,7 +309,6 @@ public class Main {
 		menu2.setEnabled(true);
 		menu2.setVisible(true);
 		
->>>>>>> origin/master
 		
 		frame2.add(rightPanel);
 		rightPanel.repaint();
@@ -336,23 +317,18 @@ public class Main {
 		bottomPanel.setVisible(true);
 		frame2.setVisible(true);
 		
-		//private static void createAndShowGUI() {
-	        //Create and set up the window.
-	        //JFrame frame2 = new JFrame("ToolBarDemo");
-	        //frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	 
-	        //Add content to the window.
-	        
-	    //}
-		//Schedule a job for the event dispatch thread:
-        //creating and showing this application's GUI.
-        //SwingUtilities.invokeLater(new Runnable() {
-          //  public void run() {
-                //Turn off metal's use of bold fonts
-           // UIManager.put("swing.boldMetal", Boolean.FALSE);
-            //createAndShowGUI();
-           // }
-		 //}	       
+		}
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new Main();
+		
+	       
+	}
+	
+	public Scene loadObjFile(ObjectFile obj , String ref) throws Exception {
+		return obj.load(getClass().getResource(ref));
 	}
 }
 
