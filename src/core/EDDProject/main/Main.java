@@ -61,6 +61,8 @@ public class Main {
 		JTextPane partDescription_Label = new JTextPane();
 		partDescription_Label.setFont(new Font("Arial",Font.BOLD,15));
 		
+		
+		
 		daPanel.setSize((WIDTH/2)+100, HEIGHT/2+100); //engine needs to be 600 by 400
 		String partName = "PC Component: ";
 		String partDescription = "Description: ";
@@ -160,6 +162,8 @@ public class Main {
 		Transform3D PSU_Vector = new Transform3D();
 		PSU_Vector.setTranslation(new Vector3d(-.3,-.1,0));
 //		int PSU = engine.createShape(0.1f, 0.1f, 0.4f, new Color3f(.4f, .2f, .1f), PSU_Vector);
+		
+		//test
 		
 		
 		text1.setBounds(100,20,200,40);
