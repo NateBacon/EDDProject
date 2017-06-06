@@ -241,7 +241,7 @@ public class Main {
 
 					text1.setText(partName+"Motherboard"); 
 //					engine.addNodeToScene(motherboard);
-
+					partDescription_Label.setText("CPU"+partDescription+"Add description for motherboard here");
 
 					
 				}
@@ -249,41 +249,18 @@ public class Main {
 				if(select.equals("Motherboard 2")){
 					//add code to perform whatever tricks you want
 
-					text1.setText(partName+"CPU"); 
+					text1.setText(partName+"Motherboard"); 
 //					engine.addNodeToScene(CPU);
-					partDescription_Label.setText("CPU"+partDescription+"The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
-							+ "/nThe CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
-							+ "logical, contral and input/output operations specified by the instructions.");
+					partDescription_Label.setText("CPU"+partDescription+"Add description for motherboard here");
 					
 				}
 				
-				if(select.equals("Motherboard 3")){
-					//add code to perform whatever tricks you want
-					text1.setText(partName+"RAM");
-//					engine.addNodeToScene(RAM);
-
-				}
 				
-				if(select.equals("Motherboard 4")){
-					
-					//add code to perform whatever tricks you want
-					text1.setText(partName+"Motherboard 4"); 
-;
-				}
-				
-				if(select.equals("Motherboard 5")){
-					//add code to perform whatever tricks you want
-					text1.setText(partName+"Power Supply"); 
-//					engine.addNodeToScene(PSU);
-					
-				}
+			
 				
 			}});
 		menu1.addItem(new String("Motherboard 1"));
 		menu1.addItem(new String("Motherboard 2"));
-		menu1.addItem(new String("Motherboard 3"));
-		menu1.addItem(new String("Motherboard 4"));
-		menu1.addItem(new String("Motherboard 5"));
 		menu1.setEnabled(true);
 		menu1.setVisible(true);
 		
@@ -298,52 +275,33 @@ public class Main {
 				if(select.equals("CPU 1")){
 					//add code to perform whatever tricks you want
 					text1.setText(partName+"CPU 1"); 
-					//engine.addNodeToScene(motherboard);
+					//add CPU node
+					partDescription_Label.setText("CPU "+partDescription+" The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
+							+ "The CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
+							+ "logical, contral and input/output operations specified by the instructions.");
 					
 				}
 				
 				if(select.equals("CPU 2")){
 					//add code to perform whatever tricks you want
 					text1.setText(partName+"CPU 2");
+					//add CPU node, different one if possible
 					
-					//add a diff motherboard
-//					engine.addNodeToScene(CPU);
 					
 					//set text for motherboard
 					partDescription_Label.setText("CPU "+partDescription+" The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
 							+ "The CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
 							+ "logical, contral and input/output operations specified by the instructions.");
-					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
+					
 					
 				}
 				
-				if(select.equals("CPU 3")){
-					//add code to perform whatever tricks you want
-					text1.setText(partName+"CPU 3");
-					//engine.addNodeToScene(RAM);
-				}
 				
-				if(select.equals("CPU 4")){
-					//add code to perform whatever tricks you want
-					text1.setText(partName+"CPU 4"); 
-					//engine.addShape(.7f, new Color3f(.2f,.5f,.3f), new Transform3D() ); SPHERE
-					//engine.addNodeToScene(GPU);
-				}
-				
-				if(select.equals("CPU 5")){
-					//add code to perform whatever tricks you want
-					text1.setText(partName+"CPU 5"); 
-					//engine.addNodeToScene(PSU);
-					
-				}
 				
 			}});
 		
 		menu2.addItem(new String("CPU 1"));
 		menu2.addItem(new String("CPU 2"));
-		menu2.addItem(new String("CPU 3"));
-		menu2.addItem(new String("CPU 4"));
-		menu2.addItem(new String("CPU 5"));
 		menu2.setEnabled(true);
 		menu2.setVisible(true);
 		
