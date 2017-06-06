@@ -27,6 +27,8 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
+import com.sun.j3d.loaders.Scene;
+import com.sun.j3d.loaders.objectfile.ObjectFile;
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 import com.sun.j3d.utils.behaviors.mouse.MouseTranslate;
 import com.sun.j3d.utils.behaviors.mouse.MouseZoom;
@@ -179,6 +181,104 @@ public class Engine extends SimpleUniverse {
 	
 	public int getPickedNode(){
 		return pickedNode;//picked node should be used to compare with the shapes created in the main class in order to update information on the screen based on a node picked by the user
+	}
+	
+	public int[] importObjs(){
+		ObjectFile motherboardModel = new ObjectFile();
+		ObjectFile cpuModel = new ObjectFile();
+		ObjectFile gpuModel = new ObjectFile();
+		ObjectFile psuModel = new ObjectFile();
+		
+		Scene[] imports = new Scene[4];
+		try{
+			imports[0] = loadObjFile(motherboardModel, "motherboard.obj");
+			imports[1] = loadObjFile(cpuModel, "cpu.obj");
+			imports[2] = loadObjFile(gpuModel, "gpu.obj");
+			imports[3] = loadObjFile(psuModel, "psu.obj");
+			
+		} catch(Exception e){
+			e.printStackTrace(System.out);
+		}
+
+		Shape3D import1 = new Shape3D();
+		Shape3D import2 = new Shape3D();
+		Shape3D import3 = new Shape3D();
+		Shape3D import4 = new Shape3D();
+		
+		if (imports[0] != null){
+			import1 = (Shape3D) imports[0].getSceneGroup().getChild(0);
+		}
+		if (imports[1] != null){
+			import2 = (Shape3D) imports[1].getSceneGroup().getChild(0);
+		}
+		if (imports[2] != null){
+			import3 = (Shape3D) imports[2].getSceneGroup().getChild(0);
+		}
+		if (imports[3] != null){
+			import4 = (Shape3D) imports[3].getSceneGroup().getChild(0);
+		}
+		
+		addColor(import1, new Color3f(0.0f, 0.3f, 0.0f));
+		addColor(import3, new Color3f(0.0f, 0.0f, 0.3f));
+		
+		//translations
+		Transform3D motherboardTranslate = new Transform3D();
+		Transform3D cpuTranslate = new Transform3D();
+		Transform3D gpuTranslate = new Transform3D();
+		Transform3D psuTranslate = new Transform3D();
+		
+		motherboardTranslate.setTranslation(new Vector3d(-0.2, 0.026, 0.26));
+		cpuTranslate.setTranslation(new Vector3d(0.1, 0.07,-0.4));
+		gpuTranslate.setTranslation(new Vector3d(-0.1, 0.07, 0.05));
+		psuTranslate.setTranslation(new Vector3d(0.2, -0.25, 0.0));
+		
+		Transform3D motherboardScale = new Transform3D();
+		Transform3D cpuScale = new Transform3D();
+		Transform3D gpuScale = new Transform3D();
+		Transform3D psuScale = new Transform3D();
+		
+		motherboardScale.setScale(0.03);
+		cpuScale.setScale(0.04);
+		gpuScale.setScale(0.001);
+		psuScale.setScale(0.03);
+		
+		motherboardTranslate.mul(motherboardScale);
+		cpuTranslate.mul(cpuScale);
+		gpuTranslate.mul(gpuScale);
+		psuTranslate.mul(psuScale);
+		
+		TransformGroup motherboard = new TransformGroup(motherboardTranslate);
+		TransformGroup CPU = new TransformGroup(cpuTranslate);
+		TransformGroup GPU = new TransformGroup(gpuTranslate);
+		TransformGroup PSU = new TransformGroup(psuTranslate);
+		
+		
+		motherboard.addChild(import1.cloneNode(true));
+		CPU.addChild(import2.cloneNode(true));
+		GPU.addChild(import3.cloneNode(true));
+		PSU.addChild(import4.cloneNode(true));
+		
+		int[] objs = new int[4];
+		
+		objs[0] = addNodeToScene(motherboard);
+		objs[1] = addNodeToScene(CPU);
+		objs[2] = addNodeToScene(GPU);
+		objs[3] = addNodeToScene(PSU);
+		
+		return objs;
+
+	}
+	
+	public Scene loadObjFile(ObjectFile obj , String ref) throws Exception {
+		return obj.load(getClass().getResource(ref));
+	}
+	
+	public void addColor(Shape3D shape, Color3f color){
+		Appearance appearance = new Appearance();
+		Material mat = new Material();
+		mat.setEmissiveColor(color);
+		appearance.setMaterial(mat);
+		shape.setAppearance(appearance);
 	}
 	
 	public int createShape(float width, float length, float height, Color3f color, Transform3D initPosition){//method to add rectangles to the scene
