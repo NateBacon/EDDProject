@@ -13,10 +13,12 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Group;
+import javax.media.j3d.Material;
 import javax.media.j3d.Shape3D;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
@@ -97,6 +99,7 @@ public class Main {
 			imports[1] = loadObjFile(cpuModel, "cpu.obj");
 			imports[2] = loadObjFile(gpuModel, "gpu.obj");
 			imports[3] = loadObjFile(psuModel, "psu.obj");
+			
 		} catch(Exception e){
 			e.printStackTrace(System.out);
 		}
@@ -107,22 +110,53 @@ public class Main {
 		//
 		//
 		//
+		Shape3D import1 = new Shape3D();
+		Shape3D import2 = new Shape3D();
+		Shape3D import3 = new Shape3D();
+		Shape3D import4 = new Shape3D();
 		
-		BranchGroup importGroup = new BranchGroup();
-		Shape3D[] shapes = new Shape3D[4];
-		Transform3D scale = new Transform3D();
-		
-		scale.setScale(0.1);
-		
-		for (int i = 0; i < imports.length; i++){
-			if (imports[i] != null){
-				importGroup = imports[i].getSceneGroup();
-				shapes[i] = (Shape3D) importGroup.getChild(0).cloneNode(true);
-				
-				TransformGroup temp = new TransformGroup(scale);
-				temp.addChild(shapes[i]);
-				engine.addNodeToScene(temp);
+		if (imports[0] != null){
+			import1 = (Shape3D) imports[0].getSceneGroup().getChild(0);
 		}
+		if (imports[1] != null){
+			import2 = (Shape3D) imports[1].getSceneGroup().getChild(0);
+		}
+		if (imports[2] != null){
+			import3 = (Shape3D) imports[2].getSceneGroup().getChild(0);
+		}
+		if (imports[3] != null){
+			import4 = (Shape3D) imports[3].getSceneGroup().getChild(0);
+		}
+		
+		addColor(import1, new Color3f(0.0f, 0.3f, 0.0f));
+		addColor(import3, new Color3f(0.0f, 0.0f, 0.3f));
+		
+		Transform3D mb = new Transform3D();
+		Transform3D c = new Transform3D();
+		Transform3D g = new Transform3D();
+		Transform3D p = new Transform3D();
+		
+		mb.setScale(0.1);
+		c.setScale(0.1);
+		g.setScale(0.01);
+		p.setScale(0.1);
+		
+		TransformGroup scaleMotherboard = new TransformGroup(mb);
+		TransformGroup scaleCPU = new TransformGroup(c);
+		TransformGroup scaleGPU = new TransformGroup(g);
+		TransformGroup scalePSU = new TransformGroup(p);
+		
+		
+		scaleMotherboard.addChild(import1.cloneNode(true));
+		scaleCPU.addChild(import2.cloneNode(true));
+		scaleGPU.addChild(import3.cloneNode(true));
+		scalePSU.addChild(import4.cloneNode(true));
+
+		engine.addNodeToScene(scaleMotherboard);
+		engine.addNodeToScene(scaleCPU);
+		engine.addNodeToScene(scaleGPU);
+		engine.addNodeToScene(scalePSU);
+		
 		
 		Transform3D Vector01 =  new Transform3D();
 		Transform3D TestBench_Top_Vector =  new Transform3D();
@@ -321,7 +355,6 @@ public class Main {
 		bottomPanel.setVisible(true);
 		frame2.setVisible(true);
 		
-		}
 	}
 
 	public static void main(String[] args) {
@@ -333,6 +366,14 @@ public class Main {
 	
 	public Scene loadObjFile(ObjectFile obj , String ref) throws Exception {
 		return obj.load(getClass().getResource(ref));
+	}
+	
+	public void addColor(Shape3D shape, Color3f color){
+		Appearance appearance = new Appearance();
+		Material mat = new Material();
+		mat.setEmissiveColor(color);
+		appearance.setMaterial(mat);
+		shape.setAppearance(appearance);
 	}
 }
 
