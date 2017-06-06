@@ -54,11 +54,11 @@ public class Main {
 		
 		Window frame2 = new Window(HEIGHT,WIDTH,"UI Window");
 		JPanel daPanel = (JPanel) frame2.getContentPane();	
-		JComboBox menu1 = new JComboBox();
-		JComboBox menu2 = new JComboBox();
-		JComboBox menu3 = new JComboBox();
-		JComboBox menu4 = new JComboBox();
-		JComboBox menu5 = new JComboBox();
+//		JComboBox menu1 = new JComboBox();
+//		JComboBox menu2 = new JComboBox();
+//		JComboBox menu3 = new JComboBox();
+//		JComboBox menu4 = new JComboBox();
+//		JComboBox menu5 = new JComboBox();
 		JLabel text1 = new JLabel();
 		JTextPane partDescription_Label = new JTextPane();
 		partDescription_Label.setFont(new Font("Arial",Font.BOLD,15));
@@ -203,11 +203,7 @@ public class Main {
 		text1.setBounds(100,20,200,40);
 		daPanel.setLocation(0, 0);
 		rightPanel.setLocation((WIDTH/2)+100, 0);
-		menu1.setBounds(50, 80, 300, 50);
-		menu2.setBounds(50, 170, 300, 50);
-		menu3.setBounds(50, 260, 300, 50);
-		menu4.setBounds(50, 350, 300, 50);
-		menu5.setBounds(50, 440, 300, 50);
+//		
 		rightPanel.setBackground(Color.gray);
 		
 		partDescription_Label.setBounds(10,420,500,200);
@@ -217,20 +213,134 @@ public class Main {
 		bottomPanel.add(partDescription_Label);
 		partDescription_Label.setVisible(true);
 
-		rightPanel.add(menu1);
-		rightPanel.add(menu2);
-		rightPanel.add(menu3);
-		rightPanel.add(menu4);
-		rightPanel.add(menu5);
+//		rightPanel.add(menu1);
+//		rightPanel.add(menu2);
+//		rightPanel.add(menu3);
+//		rightPanel.add(menu4);
+//		rightPanel.add(menu5);
 		rightPanel.add(text1);
 		//bottomPanel.add(partDescription_Label);
 		//button1.setLocation(0, 0);
 		//rightPanel.add(button1);
 		
 		
+//		menu1.addActionListener(new ActionListener(){
+//			
+//		
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				JComboBox cB = (JComboBox)e.getSource();
+//				String select = (String)cB.getSelectedItem();
+//				if(select.equals("Motherboard 1")){
+//					//add code to perform whatever tricks you want
+//
+//					text1.setText(partName+"Motherboard"); 
+////					engine.addNodeToScene(motherboard);
+//					partDescription_Label.setText("CPU"+partDescription+"Add description for motherboard here");
+//
+//					
+//				}
+//				
+//				if(select.equals("Motherboard 2")){
+//					//add code to perform whatever tricks you want
+//
+//					text1.setText(partName+"Motherboard"); 
+////					engine.addNodeToScene(CPU);
+//					partDescription_Label.setText("CPU"+partDescription+"Add description for motherboard here");
+//					
+//				}
+//				
+//				
+//			
+//				
+//			}});
+//		menu1.addItem(new String("Motherboard 1"));
+//		menu1.addItem(new String("Motherboard 2"));
+//		menu1.setEnabled(true);
+//		menu1.setVisible(true);
+//		
+//		menu2.addActionListener(new ActionListener(){
+//			
+//			
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				JComboBox cB = (JComboBox)e.getSource();
+//				String select = (String)cB.getSelectedItem();
+//				if(select.equals("CPU 1")){
+//					//add code to perform whatever tricks you want
+//					text1.setText(partName+"CPU 1"); 
+//					//add CPU node
+//					partDescription_Label.setText("CPU "+partDescription+" The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
+//							+ "The CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
+//							+ "logical, contral and input/output operations specified by the instructions.");
+//					
+//				}
+//				
+//				if(select.equals("CPU 2")){
+//					//add code to perform whatever tricks you want
+//					text1.setText(partName+"CPU 2");
+//					//add CPU node, different one if possible
+//					
+//					
+//					//set text for motherboard
+//					partDescription_Label.setText("CPU "+partDescription+" The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
+//							+ "The CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
+//							+ "logical, contral and input/output operations specified by the instructions.");
+//					
+//					
+//				}
+//				
+//				
+//				
+//			}});
+//		
+//		menu2.addItem(new String("CPU 1"));
+//		menu2.addItem(new String("CPU 2"));
+//		menu2.setEnabled(true);
+//		menu2.setVisible(true);
+		
+		twiddleSticks(rightPanel, text1, partName, partDescription, partDescription_Label);
+		
+		frame2.add(rightPanel);
+		rightPanel.repaint();
+		rightPanel.setVisible(true);
+		bottomPanel.repaint();
+		bottomPanel.setVisible(true);
+		frame2.setVisible(true);
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new Main();
+		
+	       
+	}
+	
+	public void twiddleSticks(JPanel rightPanel, JLabel text1, String partName, String partDescription, JTextPane partDescription_Label){
+		JComboBox menu1 = new JComboBox();
+		JComboBox menu2 = new JComboBox();
+		JComboBox menu3 = new JComboBox();
+		JComboBox menu4 = new JComboBox();
+		JComboBox menu5 = new JComboBox();
+		
+		menu1.setBounds(50, 80, 300, 50);
+		menu2.setBounds(50, 170, 300, 50);
+		menu3.setBounds(50, 260, 300, 50);
+		menu4.setBounds(50, 350, 300, 50);
+		menu5.setBounds(50, 440, 300, 50);
+		
+		rightPanel.add(menu1);
+		rightPanel.add(menu2);
+		rightPanel.add(menu3);
+		rightPanel.add(menu4);
+		rightPanel.add(menu5);
+		
 		menu1.addActionListener(new ActionListener(){
 			
-		
+			
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -304,22 +414,6 @@ public class Main {
 		menu2.addItem(new String("CPU 2"));
 		menu2.setEnabled(true);
 		menu2.setVisible(true);
-		
-		
-		frame2.add(rightPanel);
-		rightPanel.repaint();
-		rightPanel.setVisible(true);
-		bottomPanel.repaint();
-		bottomPanel.setVisible(true);
-		frame2.setVisible(true);
-		
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new Main();
-		
-	       
 	}
 	
 	public Scene loadObjFile(ObjectFile obj , String ref) throws Exception {
