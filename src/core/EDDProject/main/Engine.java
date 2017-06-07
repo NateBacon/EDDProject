@@ -260,10 +260,15 @@ public class Engine extends SimpleUniverse {
 		
 		int[] objs = new int[4];
 		
-		objs[0] = addNodeToScene(motherboard);
-		objs[1] = addNodeToScene(CPU);
-		objs[2] = addNodeToScene(GPU);
-		objs[3] = addNodeToScene(PSU);
+		nodeList.add(motherboard);
+		nodeList.add(CPU);
+		nodeList.add(GPU);
+		nodeList.add(PSU);
+		
+		objs[0] = nodeList.indexOf(motherboard);
+		objs[1] = nodeList.indexOf(CPU);
+		objs[2] = nodeList.indexOf(GPU);
+		objs[3] = nodeList.indexOf(PSU);
 		
 		return objs;
 

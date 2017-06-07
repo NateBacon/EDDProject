@@ -19,6 +19,7 @@ import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Group;
 import javax.media.j3d.Material;
+import javax.media.j3d.Node;
 import javax.media.j3d.Shape3D;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
@@ -49,16 +50,18 @@ public class Main {
 	
 	public static int WIDTH = 1000;
 	public static int HEIGHT = 600;
+	private int PSU;
+	private int motherboard;
+	private int CPU_Fan;
+	private int CPU;
+	private int GPU;
+	private Engine engine;
+	private int[] indexes;
 	
 	public Main(){
 		
 		Window frame2 = new Window(HEIGHT,WIDTH,"UI Window");
 		JPanel daPanel = (JPanel) frame2.getContentPane();	
-//		JComboBox menu1 = new JComboBox();
-//		JComboBox menu2 = new JComboBox();
-//		JComboBox menu3 = new JComboBox();
-//		JComboBox menu4 = new JComboBox();
-//		JComboBox menu5 = new JComboBox();
 		JLabel text1 = new JLabel();
 		JTextPane partDescription_Label = new JTextPane();
 		partDescription_Label.setFont(new Font("Arial",Font.BOLD,15));
@@ -85,16 +88,16 @@ public class Main {
 		bottomPanel.setSize((WIDTH/2)+100,(HEIGHT/2)-100);
 		
 		Canvas3D canvas = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
-		Engine engine = new Engine(canvas, daPanel);
+		engine = new Engine(canvas, daPanel);
 		
 		//Import the obj files from libs
 		
-		int[] indexes = engine.importObjs();
+		indexes = engine.importObjs();
 		
-		int motherboard = engine.addNodeToScene(indexes[0]);
-		int CPU = engine.addNodeToScene(indexes[1]);
-		int GPU = engine.addNodeToScene(indexes[2]);
-		int PSU = engine.addNodeToScene(indexes[3]);
+		//motherboard = engine.addNodeToScene(indexes[0]);
+		//CPU = engine.addNodeToScene(indexes[1]);
+		//GPU = engine.addNodeToScene(indexes[2]);
+//		PSU = engine.addNodeToScene(indexes[3]);
 		
 		Transform3D Vector01 =  new Transform3D();
 		Transform3D TestBench_Top_Vector =  new Transform3D();
@@ -118,7 +121,7 @@ public class Main {
 		//CPU
 		Transform3D CPU_Pos = new Transform3D();
 		CPU_Pos.setTranslation(new Vector3d(-.1,.09,-.22));
-		//int CPU = engine.createShape(0.09f, 0.01f, 0.09f, new Color3f(.5f, .2f, .2f), CPU_Pos);
+		int CPU = engine.createShape(0.09f, 0.01f, 0.09f, new Color3f(.5f, .2f, .2f), CPU_Pos);
 		
 		//RAM
 		Transform3D RAM_Vector = new Transform3D();
@@ -151,93 +154,9 @@ public class Main {
 		bottomPanel.add(partDescription_Label);
 		partDescription_Label.setVisible(true);
 
-//		rightPanel.add(menu1);
-//		rightPanel.add(menu2);
-//		rightPanel.add(menu3);
-//		rightPanel.add(menu4);
-//		rightPanel.add(menu5);
+
 		rightPanel.add(text1);
-		//bottomPanel.add(partDescription_Label);
-		//button1.setLocation(0, 0);
-		//rightPanel.add(button1);
 		
-		
-//		menu1.addActionListener(new ActionListener(){
-//			
-//		
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				JComboBox cB = (JComboBox)e.getSource();
-//				String select = (String)cB.getSelectedItem();
-//				if(select.equals("Motherboard 1")){
-//					//add code to perform whatever tricks you want
-//
-//					text1.setText(partName+"Motherboard"); 
-////					engine.addNodeToScene(motherboard);
-//					partDescription_Label.setText("CPU"+partDescription+"Add description for motherboard here");
-//
-//					
-//				}
-//				
-//				if(select.equals("Motherboard 2")){
-//					//add code to perform whatever tricks you want
-//
-//					text1.setText(partName+"Motherboard"); 
-////					engine.addNodeToScene(CPU);
-//					partDescription_Label.setText("CPU"+partDescription+"Add description for motherboard here");
-//					
-//				}
-//				
-//				
-//			
-//				
-//			}});
-//		menu1.addItem(new String("Motherboard 1"));
-//		menu1.addItem(new String("Motherboard 2"));
-//		menu1.setEnabled(true);
-//		menu1.setVisible(true);
-//		
-//		menu2.addActionListener(new ActionListener(){
-//			
-//			
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				JComboBox cB = (JComboBox)e.getSource();
-//				String select = (String)cB.getSelectedItem();
-//				if(select.equals("CPU 1")){
-//					//add code to perform whatever tricks you want
-//					text1.setText(partName+"CPU 1"); 
-//					//add CPU node
-//					partDescription_Label.setText("CPU "+partDescription+" The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
-//							+ "The CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
-//							+ "logical, contral and input/output operations specified by the instructions.");
-//					
-//				}
-//				
-//				if(select.equals("CPU 2")){
-//					//add code to perform whatever tricks you want
-//					text1.setText(partName+"CPU 2");
-//					//add CPU node, different one if possible
-//					
-//					
-//					//set text for motherboard
-//					partDescription_Label.setText("CPU "+partDescription+" The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
-//							+ "The CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
-//							+ "logical, contral and input/output operations specified by the instructions.");
-//					
-//					
-//				}
-//				
-//				
-//				
-//			}});
-//		
-//		menu2.addItem(new String("CPU 1"));
-//		menu2.addItem(new String("CPU 2"));
-//		menu2.setEnabled(true);
-//		menu2.setVisible(true);
 		
 		twiddleSticks(rightPanel, text1, partName, partDescription, partDescription_Label);
 		
@@ -288,27 +207,20 @@ public class Main {
 					//add code to perform whatever tricks you want
 
 					text1.setText(partName+"Motherboard"); 
-//					engine.addNodeToScene(motherboard);
-					partDescription_Label.setText("CPU"+partDescription+"Add description for motherboard here");
+					motherboard = engine.addNodeToScene(indexes[0]);
+					partDescription_Label.setText("Motherboard "+partDescription+"A motherboard is a printed circuit board containing the principal components of a computer or other device, with connectors into which other circuit boards can be slotted.");
 
 					
 				}
 				
-				if(select.equals("Motherboard 2")){
-					//add code to perform whatever tricks you want
-
-					text1.setText(partName+"Motherboard"); 
-//					engine.addNodeToScene(CPU);
-					partDescription_Label.setText("CPU"+partDescription+"Add description for motherboard here");
-					
-				}
+				
 				
 				
 			
 				
 			}});
+		menu1.addItem(new String(""));
 		menu1.addItem(new String("Motherboard 1"));
-		menu1.addItem(new String("Motherboard 2"));
 		menu1.setEnabled(true);
 		menu1.setVisible(true);
 		
@@ -316,30 +228,31 @@ public class Main {
 			
 			
 
+			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JComboBox cB = (JComboBox)e.getSource();
 				String select = (String)cB.getSelectedItem();
-				if(select.equals("CPU 1")){
+				if(select.equals("CPU")){
 					//add code to perform whatever tricks you want
-					text1.setText(partName+"CPU 1"); 
+					text1.setText(partName+"CPU"); 
 					//add CPU node
+					engine.addNodeToScene(CPU);
 					partDescription_Label.setText("CPU "+partDescription+" The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
 							+ "The CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
 							+ "logical, contral and input/output operations specified by the instructions.");
 					
 				}
 				
-				if(select.equals("CPU 2")){
+				if(select.equals("CPU Fan")){
 					//add code to perform whatever tricks you want
-					text1.setText(partName+"CPU 2");
-					//add CPU node, different one if possible
+					text1.setText(partName+"CPU Fan");
+					//add CPU fan node to scene
 					
+					CPU_Fan = engine.addNodeToScene(indexes[1]);
 					
-					//set text for motherboard
-					partDescription_Label.setText("CPU "+partDescription+" The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
-							+ "The CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
-							+ "logical, contral and input/output operations specified by the instructions.");
+					partDescription_Label.setText("CPU Fan "+partDescription+" The CPU fan serves the purpose of displacing heat from the CPU. The fan usually consists of a large heatsink and the fanblade itself, and genrally sits ontop of the processor with a thin film of thermal paste between the two.");
 					
 					
 				}
@@ -349,10 +262,114 @@ public class Main {
 			}});
 		
 		menu2.addItem(new String("CPU 1"));
-		menu2.addItem(new String("CPU 2"));
+		menu2.addItem(new String("CPU Fan"));
 		menu2.setEnabled(true);
 		menu2.setVisible(true);
+		
+		menu3.addActionListener(new ActionListener(){
+			
+			
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox cB = (JComboBox)e.getSource();
+				String select = (String)cB.getSelectedItem();
+				if(select.equals("RAM 1")){
+					//add code to perform whatever tricks you want
+
+					text1.setText(partName+"RAM"); 
+
+					partDescription_Label.setText("RAM "+partDescription+" RAM (pronounced ramm) is an acronym for random access memory, a type of computer memory that can be accessed randomly; that is, any byte of memory can be accessed without touching the preceding bytes. RAM is the most common type of memory found in computers and other devices, such as printers.");
+
+					
+				}
+				
+				if(select.equals("RAM 2")){
+					//add code to perform whatever tricks you want
+
+					text1.setText(partName+"RAM"); 
+//					engine.addNodeToScene(CPU);
+					partDescription_Label.setText("RAM "+partDescription+" RAM (pronounced ramm) is an acronym for random access memory, a type of computer memory that can be accessed randomly; that is, any byte of memory can be accessed without touching the preceding bytes. RAM is the most common type of memory found in computers and other devices, such as printers.");
+					
+				}
+				
+				
+			
+				
+			}});
+		menu3.addItem(new String(""));
+		menu3.addItem(new String("RAM 1"));
+		menu3.setEnabled(true);
+		menu3.setVisible(true);
+		
+		menu4.addActionListener(new ActionListener(){
+			
+			
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox cB = (JComboBox)e.getSource();
+				String select = (String)cB.getSelectedItem();
+				if(select.equals("GPU 1")){
+					//add code to perform whatever tricks you want
+
+					text1.setText(partName+"GPU"); 
+					GPU = engine.addNodeToScene(indexes[2]);
+					partDescription_Label.setText("GPU "+partDescription+" (Graphics Processing Unit) A programmable logic chip (processor) specialized for display functions. The GPU renders images, animations and video for the computer's screen. GPUs are located on plug-in cards, in a chipset on the motherboard or in the same chip as the CPU.");
+
+					
+				}
+				
+				if(select.equals("GPU 2")){
+					//add code to perform whatever tricks you want
+
+					text1.setText(partName+"GPU"); 
+					GPU = engine.addNodeToScene(indexes[2]);
+					partDescription_Label.setText("GPU "+partDescription+" (Graphics Processing Unit) A programmable logic chip (processor) specialized for display functions. The GPU renders images, animations and video for the computer's screen. GPUs are located on plug-in cards, in a chipset on the motherboard or in the same chip as the CPU.");
+					
+				}
+				
+				
+			
+				
+			}});
+		menu4.addItem(new String(""));
+		menu4.addItem(new String("GPU 1"));
+		menu4.setEnabled(true);
+		menu4.setVisible(true);
+		
+		menu5.addActionListener(new ActionListener(){
+			
+			
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox cB = (JComboBox)e.getSource();
+				String select = (String)cB.getSelectedItem();
+				if(select.equals("Power Supply 1")){
+					//add code to perform whatever tricks you want
+
+					text1.setText(partName+"Power Supply"); 
+					PSU = engine.addNodeToScene(indexes[3]);
+					partDescription_Label.setText("Power Supply "+partDescription+" A power supply unit (or PSU) converts mains AC to low-voltage regulated DC power for the internal components of a computer. Modern personal computers universally use switched-mode power supplies. Some power supplies have a manual switch for selecting input voltage, while others automatically adapt to the mains voltage.");
+
+					
+				}
+				
+				
+				
+				
+			
+				
+			}});
+		
+		menu5.addItem(new String(""));
+		menu5.addItem(new String("Power Supply 1"));
+		menu5.setEnabled(true);
+		menu5.setVisible(true);
 	}
+	
+	
 	
 	
 }
