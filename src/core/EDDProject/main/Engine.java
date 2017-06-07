@@ -98,6 +98,7 @@ public class Engine extends SimpleUniverse {
 		
 		//weird stuff that i dont know what it does
 		BoundingSphere bounds = new BoundingSphere();
+		bounds.setRadius(1000);
 		rotateBehaviour.setSchedulingBounds(bounds);
 		translateBehaviour.setSchedulingBounds(bounds);
 		zoomBehaviour.setSchedulingBounds(bounds);
@@ -117,7 +118,7 @@ public class Engine extends SimpleUniverse {
 		temp.setInfluencingBounds(bounds);
 		light.setInfluencingBounds(bounds);
 		group.addChild(light);
-		group.addChild(temp);
+		//group.addChild(temp);
 		
 		//add the transform group to the root group
 		group.addChild(transformGroup);
