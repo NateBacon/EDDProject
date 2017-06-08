@@ -238,7 +238,7 @@ public class Main {
 					//add code to perform whatever tricks you want
 					text1.setText(partName+"CPU"); 
 					//add CPU node
-					engine.addNodeToScene(CPU);
+					//engine.addNodeToScene(CPU);
 					partDescription_Label.setText("CPU "+partDescription+" The Central Processing Unit, or CPU, is the \"brains\" of the computer. "
 							+ "The CPU is a chip made from silicon wafers that handles the instructions of a program by computing the basic arithmetic, "
 							+ "logical, contral and input/output operations specified by the instructions.");
@@ -288,7 +288,6 @@ public class Main {
 					//add code to perform whatever tricks you want
 
 					text1.setText(partName+"RAM"); 
-//					engine.addNodeToScene(CPU);
 					partDescription_Label.setText("RAM "+partDescription+" RAM (pronounced ramm) is an acronym for random access memory, a type of computer memory that can be accessed randomly; that is, any byte of memory can be accessed without touching the preceding bytes. RAM is the most common type of memory found in computers and other devices, such as printers.");
 					
 				}
